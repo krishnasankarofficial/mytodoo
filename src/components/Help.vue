@@ -53,72 +53,143 @@
 
             <section class="p-3 bg-gray rounded-xl">
                 <h3 class="font-PoppinsBold text-green mb-2">✨ Quick Add</h3>
-                <p class="text-light/90 mb-2">Type naturally and dates are parsed automatically:</p>
-                <ul class="list-disc list-inside space-y-1 text-light/80 text-xs">
-                    <li>"Call Sam tomorrow 3pm"</li>
-                    <li>"Meeting next Monday at 2pm"</li>
-                    <li>"Dentist appointment March 15"</li>
-                    <li>"Review PR in 2 hours"</li>
-                </ul>
+                <p class="text-light/90 mb-2 text-xs">Type naturally — dates are parsed automatically. Press Enter or click Add.</p>
+                <div class="space-y-1 text-light/70 text-[11px] font-mono bg-dark/50 p-2 rounded">
+                    <div>"Call Sam tomorrow 3pm"</div>
+                    <div>"Meeting next Monday at 2pm"</div>
+                    <div>"Dentist March 15"</div>
+                    <div>"Review PR in 2 hours"</div>
+                </div>
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
                 <h3 class="font-PoppinsBold text-green mb-2">📋 Task Features</h3>
-                <ul class="list-disc list-inside space-y-1 text-light/90">
-                    <li><strong>Priority:</strong> High, Medium, Low, None</li>
-                    <li><strong>Tags:</strong> Comma-separated labels for filtering</li>
-                    <li><strong>Subtasks:</strong> Break tasks into smaller steps</li>
-                    <li><strong>Recurrence:</strong> Daily, Weekly, or Custom intervals</li>
-                    <li><strong>Drag & Drop:</strong> Reorder tasks in All view</li>
-                </ul>
+                <div class="space-y-2 text-xs">
+                    <div>
+                        <strong class="text-light">Priority</strong>
+                        <p class="text-light/70 mt-0.5">🔴 High · 🟡 Medium · 🔵 Low · ⚪ None</p>
+                    </div>
+                    <div>
+                        <strong class="text-light">Tags</strong>
+                        <p class="text-light/70 mt-0.5">Add labels for filtering. Use existing tags or create new ones.</p>
+                    </div>
+                    <div>
+                        <strong class="text-light">Subtasks</strong>
+                        <p class="text-light/70 mt-0.5">Break tasks into smaller checkable steps.</p>
+                    </div>
+                    <div>
+                        <strong class="text-light">Recurrence</strong>
+                        <p class="text-light/70 mt-0.5">Daily, Weekly, or Custom intervals. Next instance auto-created on completion.</p>
+                    </div>
+                    <div>
+                        <strong class="text-light">Drag & Drop</strong>
+                        <p class="text-light/70 mt-0.5">Grab ⋮⋮ handle to reorder tasks in All view.</p>
+                    </div>
+                </div>
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
                 <h3 class="font-PoppinsBold text-green mb-2">🎯 Views</h3>
-                <ul class="list-disc list-inside space-y-1 text-light/90">
-                    <li><strong>Today:</strong> Overdue and due today</li>
-                    <li><strong>Upcoming:</strong> Future due dates, sorted chronologically</li>
-                    <li><strong>All:</strong> All active tasks, custom order</li>
-                    <li><strong>Completed:</strong> Finished tasks (can reopen)</li>
-                    <li><strong>Trash:</strong> Soft-deleted tasks (can restore)</li>
-                    <li><strong>Focus:</strong> One task at a time with Pomodoro</li>
-                </ul>
+                <div class="space-y-1.5 text-xs">
+                    <div class="flex items-start gap-2">
+                        <strong class="text-light min-w-[80px]">Today</strong>
+                        <span class="text-light/70">Overdue + due today</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <strong class="text-light min-w-[80px]">Upcoming</strong>
+                        <span class="text-light/70">Future due dates, sorted</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <strong class="text-light min-w-[80px]">All</strong>
+                        <span class="text-light/70">All active tasks, custom order</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <strong class="text-light min-w-[80px]">Completed</strong>
+                        <span class="text-light/70">Done tasks (can reopen)</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <strong class="text-light min-w-[80px]">Trash</strong>
+                        <span class="text-light/70">Deleted (can restore)</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <strong class="text-light min-w-[80px]">Focus</strong>
+                        <span class="text-light/70">One task + Pomodoro</span>
+                    </div>
+                </div>
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
                 <h3 class="font-PoppinsBold text-green mb-2">💾 Data & Storage</h3>
-                <ul class="list-disc list-inside space-y-1 text-light/90">
-                    <li><strong>Local-first:</strong> All data stays in your browser</li>
-                    <li><strong>Auto-save:</strong> Changes saved automatically</li>
-                    <li><strong>Snapshots:</strong> Last 5 states kept for recovery</li>
-                    <li><strong>Export/Import:</strong> JSON backup with metadata</li>
-                    <li><strong>Auto-backup:</strong> Optional periodic exports</li>
-                </ul>
+                <div class="space-y-2 text-light/90 text-xs">
+                    <div>
+                        <strong class="text-light">Local-first storage</strong>
+                        <p class="text-light/70 mt-0.5">All data stays in your browser. No server, no account needed.</p>
+                    </div>
+                    <div>
+                        <strong class="text-light">Auto-save</strong>
+                        <p class="text-light/70 mt-0.5">Changes saved automatically after 400ms of inactivity.</p>
+                    </div>
+                    <div>
+                        <strong class="text-light">Snapshots</strong>
+                        <p class="text-light/70 mt-0.5">Last 5 states kept in localStorage for quick recovery if data corrupts.</p>
+                    </div>
+                    <div>
+                        <strong class="text-light">Export JSON</strong>
+                        <p class="text-light/70 mt-0.5">Manual backup with timestamp. Download anytime.</p>
+                    </div>
+                    <div>
+                        <strong class="text-light">Import JSON</strong>
+                        <p class="text-light/70 mt-0.5">Restore from backup. Preview before replacing all data.</p>
+                    </div>
+                    <div>
+                        <strong class="text-light">Auto-backup (optional)</strong>
+                        <p class="text-light/70 mt-0.5">Enable checkbox to auto-download JSON backup every 60 minutes. Files saved to your Downloads folder as <code class="text-red text-[10px]">stride-auto-YYYY-MM-DD.json</code></p>
+                    </div>
+                </div>
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
                 <h3 class="font-PoppinsBold text-green mb-2">🔍 Search & Filter</h3>
-                <p class="text-light/90">Search matches task titles, descriptions, and tags. Tag filter shows exact matches. Both filters work together.</p>
+                <div class="space-y-2 text-xs">
+                    <div>
+                        <strong class="text-light">Search</strong>
+                        <p class="text-light/70 mt-0.5">Matches task titles, descriptions, and tags. Works across all views.</p>
+                    </div>
+                    <div>
+                        <strong class="text-light">Tag filter</strong>
+                        <p class="text-light/70 mt-0.5">Select a tag to show only tasks with that tag. Both filters work together.</p>
+                    </div>
+                </div>
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
                 <h3 class="font-PoppinsBold text-green mb-2">⏱️ Focus Mode</h3>
-                <p class="text-light/90 mb-2">Work on one task at a time with optional Pomodoro timer:</p>
-                <ul class="list-disc list-inside space-y-1 text-light/80 text-xs">
-                    <li>Shows earliest due task from your active list</li>
-                    <li>Start work sessions (default 25 min)</li>
-                    <li>Take breaks (default 5 min)</li>
-                    <li>Browser notifications when timer completes</li>
-                </ul>
+                <p class="text-light/90 mb-2 text-xs">Work on one task at a time with optional Pomodoro timer.</p>
+                <div class="space-y-1.5 text-light/70 text-[11px]">
+                    <div>• Shows earliest due task from active list</div>
+                    <div>• <strong class="text-light">Start</strong> — work session (default 25 min)</div>
+                    <div>• <strong class="text-light">Break</strong> — rest period (default 5 min)</div>
+                    <div>• <strong class="text-light">Stop</strong> — cancel timer</div>
+                    <div>• Browser notifications when timer completes (enable via Notify button)</div>
+                </div>
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
-                <h3 class="font-PoppinsBold text-green mb-2">📊 Productivity</h3>
-                <ul class="list-disc list-inside space-y-1 text-light/90">
-                    <li><strong>Streak:</strong> Days with completed tasks</li>
-                    <li><strong>Daily Progress:</strong> % of today's tasks done</li>
-                    <li><strong>Recurring Tasks:</strong> Auto-create next instance</li>
-                </ul>
+                <h3 class="font-PoppinsBold text-green mb-2">📊 Productivity Tracking</h3>
+                <div class="space-y-2 text-xs">
+                    <div>
+                        <strong class="text-light">🔥 Streak</strong>
+                        <p class="text-light/70 mt-0.5">Consecutive days with at least one completed task. Shown in header.</p>
+                    </div>
+                    <div>
+                        <strong class="text-light">📊 Daily Progress</strong>
+                        <p class="text-light/70 mt-0.5">Percentage of today's due tasks completed. Updates in real-time.</p>
+                    </div>
+                    <div>
+                        <strong class="text-light">🔁 Recurring Tasks</strong>
+                        <p class="text-light/70 mt-0.5">When completed, next instance auto-created based on recurrence rule.</p>
+                    </div>
+                </div>
             </section>
         </div>
     </div>
