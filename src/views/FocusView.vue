@@ -2,7 +2,7 @@
     <section class="max-w-lg mx-auto text-center">
         <h2 class="text-2xl font-PoppinsBold mb-2">Focus</h2>
         <p class="text-sm text-light/50 mb-6">One task at a time · Pomodoro timer</p>
-        <div v-if="current" class="rounded-2xl border border-light/20 bg-gray/50 p-6 text-left">
+        <div v-if="current" class="rounded-2xl border border-light/20 bg-gray/50 p-4 sm:p-6 text-left min-w-0">
             <h3 class="font-PoppinsBold text-xl mb-2">{{ current.title }}</h3>
             <p v-if="current.description" class="text-light/70 text-sm mb-4">{{ current.description }}</p>
             <div class="flex flex-wrap gap-2 justify-center mb-6">
@@ -25,7 +25,7 @@
             </div>
             <div class="border-t border-light/10 pt-4">
                 <p class="text-xs text-light/50 mb-2">Pomodoro</p>
-                <div class="font-mono text-3xl mb-2">{{ formatClock(remaining) }}</div>
+                <div class="font-mono text-2xl sm:text-3xl tabular-nums mb-2">{{ formatClock(remaining) }}</div>
                 <div class="flex flex-wrap gap-2 justify-center">
                     <Tooltip text="Start work session (Pomodoro)" position="top" inline>
                         <button

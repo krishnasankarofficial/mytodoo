@@ -1,5 +1,7 @@
 <template>
-    <nav class="flex flex-wrap gap-2 justify-center md:justify-start items-center border-b border-light/10 pb-3 mb-4">
+    <nav
+        class="flex flex-wrap gap-1.5 sm:gap-2 justify-center md:justify-start items-stretch sm:items-center border-b border-light/10 pb-3 mb-4"
+    >
         <Tooltip
             v-for="link in links"
             :key="link.to"
@@ -9,7 +11,7 @@
         >
             <RouterLink
                 :to="link.to"
-                class="px-3 py-1.5 rounded-lg text-sm font-PoppinsBold transition-colors flex items-center gap-1.5"
+                class="px-2.5 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-PoppinsBold transition-colors flex items-center gap-1 sm:gap-1.5 min-h-[2.75rem] sm:min-h-0"
                 :class="
                     route.path === link.to
                         ? 'bg-red/90 text-dark'

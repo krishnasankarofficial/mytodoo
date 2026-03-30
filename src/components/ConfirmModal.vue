@@ -2,27 +2,27 @@
     <Transition name="modal">
         <div
             v-if="isOpen"
-            class="fixed inset-0 z-50 flex items-center justify-center bg-dark/80 backdrop-blur-sm"
+            class="fixed inset-0 z-50 flex items-center justify-center bg-dark/80 backdrop-blur-sm p-4"
             @click.self="cancel"
         >
             <div
-                class="w-[90vw] max-w-md bg-dark border border-light/20 rounded-2xl shadow-2xl p-6 flex flex-col gap-4"
+                class="w-full max-w-md max-h-[min(90dvh,100%)] overflow-y-auto bg-dark border border-light/20 rounded-2xl shadow-2xl p-5 sm:p-6 flex flex-col gap-4"
                 role="dialog"
                 aria-modal="true"
             >
                 <h3 class="text-lg font-PoppinsBold text-light">{{ title }}</h3>
                 <p class="text-sm text-light/80">{{ message }}</p>
-                <div class="flex gap-3 justify-end">
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 sm:justify-end">
                     <button
                         type="button"
-                        class="px-4 py-2 rounded-xl border border-light/30 hover:bg-gray text-sm font-Poppins"
+                        class="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-light/30 hover:bg-gray text-sm font-Poppins"
                         @click="cancel"
                     >
                         {{ cancelText }}
                     </button>
                     <button
                         type="button"
-                        class="px-4 py-2 rounded-xl bg-red text-dark font-PoppinsBold text-sm hover:opacity-90"
+                        class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-red text-dark font-PoppinsBold text-sm hover:opacity-90"
                         @click="confirm"
                     >
                         {{ confirmText }}

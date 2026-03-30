@@ -14,42 +14,42 @@
                 Keyboard shortcuts
             </h3>
             <div class="space-y-1.5 text-sm text-light/90">
-                <div class="flex justify-between items-center gap-2">
+                <div class="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-center sm:gap-2">
                     <span class="flex items-center gap-2 min-w-0">
                         <CalendarDays :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
                         Today view
                     </span>
                     <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs shrink-0">Alt+1</kbd>
                 </div>
-                <div class="flex justify-between items-center gap-2">
+                <div class="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-center sm:gap-2">
                     <span class="flex items-center gap-2 min-w-0">
                         <CalendarClock :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
                         Upcoming view
                     </span>
                     <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs shrink-0">Alt+2</kbd>
                 </div>
-                <div class="flex justify-between items-center gap-2">
+                <div class="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-center sm:gap-2">
                     <span class="flex items-center gap-2 min-w-0">
                         <ListTodo :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
                         All tasks view
                     </span>
                     <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs shrink-0">Alt+3</kbd>
                 </div>
-                <div class="flex justify-between items-center gap-2">
+                <div class="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-center sm:gap-2">
                     <span class="flex items-center gap-2 min-w-0">
                         <CheckCircle2 :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
                         Completed view
                     </span>
                     <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs shrink-0">Alt+4</kbd>
                 </div>
-                <div class="flex justify-between items-center gap-2">
+                <div class="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-center sm:gap-2">
                     <span class="flex items-center gap-2 min-w-0">
                         <Trash2 :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
                         Trash view
                     </span>
                     <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs shrink-0">Alt+5</kbd>
                 </div>
-                <div class="flex justify-between items-center gap-2">
+                <div class="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-center sm:gap-2">
                     <span class="flex items-center gap-2 min-w-0">
                         <Target :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
                         Focus mode
@@ -60,21 +60,21 @@
                         <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs">Alt+F</kbd>
                     </span>
                 </div>
-                <div class="flex justify-between items-center gap-2">
+                <div class="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-center sm:gap-2">
                     <span class="flex items-center gap-2 min-w-0">
                         <Flame :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
                         Streak view
                     </span>
                     <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs shrink-0">Alt+7</kbd>
                 </div>
-                <div class="flex justify-between items-center gap-2">
+                <div class="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-center sm:gap-2">
                     <span class="flex items-center gap-2 min-w-0">
                         <PlusCircle :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
                         Quick add task
                     </span>
                     <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs shrink-0">Alt+N</kbd>
                 </div>
-                <div class="flex justify-between items-center gap-2">
+                <div class="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-center sm:gap-2">
                     <span class="flex items-center gap-2 min-w-0">
                         <Search :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
                         Focus search filter
@@ -85,7 +85,7 @@
                         <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs">⌘K</kbd>
                     </span>
                 </div>
-                <div class="flex justify-between items-center gap-2">
+                <div class="flex flex-col gap-1 sm:flex-row sm:justify-between sm:items-center sm:gap-2">
                     <span class="flex items-center gap-2 min-w-0">
                         <BookOpen :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
                         This documentation page

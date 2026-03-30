@@ -9,7 +9,7 @@
             <select
                 id="qa-priority"
                 v-model="priority"
-                class="shrink-0 bg-gray text-light font-Poppins text-sm border border-light/20 rounded-2xl px-4 py-4 outline-none min-w-[120px]"
+                class="shrink-0 bg-gray text-light font-Poppins text-sm border border-light/20 rounded-2xl px-3 sm:px-4 py-3 sm:py-4 outline-none w-full sm:w-auto sm:min-w-[120px]"
             >
                 <option value="high">High</option>
                 <option value="medium">Medium</option>
@@ -31,12 +31,12 @@
                 type="text"
                 name="quick-add-title"
                 autocomplete="off"
-                class="w-full bg-gray text-light font-Poppins p-4 pr-28 outline-none rounded-2xl border border-transparent focus:border-light/30"
+                class="w-full bg-gray text-light font-Poppins p-3 sm:p-4 pr-[4.5rem] sm:pr-28 outline-none rounded-2xl border border-transparent focus:border-light/30 min-w-0"
                 placeholder="Quick add… try 'Call Sam tomorrow 3pm'"
             />
             <button
                 type="submit"
-                class="absolute right-2 top-1/2 z-20 -translate-y-1/2 bg-red text-dark font-PoppinsBold text-sm px-4 py-2 rounded-xl hover:opacity-90 flex items-center gap-1.5"
+                class="absolute right-1.5 sm:right-2 top-1/2 z-20 -translate-y-1/2 bg-red text-dark font-PoppinsBold text-xs sm:text-sm px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl hover:opacity-90 flex items-center gap-1 sm:gap-1.5 shrink-0"
             >
                 <Plus :size="16" :stroke-width="2.5" />
                 Add

@@ -183,11 +183,11 @@
                         <XCircle :size="10" />
                     </button>
                 </div>
-                <div class="flex gap-2">
+                <div class="flex flex-col sm:flex-row gap-2 min-w-0">
                     <select
                         v-if="availableTags.length > 0"
                         ref="existingTagSelect"
-                        class="flex-1 bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm"
+                        class="w-full sm:flex-1 min-w-0 bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm"
                         @change="onExistingTagSelect"
                     >
                         <option value="">Select existing tag…</option>
@@ -199,20 +199,20 @@
                         v-model="newTagInput"
                         type="text"
                         placeholder="New tag"
-                        :class="availableTags.length > 0 ? 'flex-1' : 'flex-[2]'"
-                        class="bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm"
+                        :class="availableTags.length > 0 ? 'sm:flex-1' : 'sm:flex-[2]'"
+                        class="w-full min-w-0 bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm"
                         @keydown.enter.prevent="addNewTag"
                     />
                     <button
                         type="button"
-                        class="px-3 py-2 rounded-lg border border-light/20 hover:bg-gray text-xs"
+                        class="shrink-0 self-start sm:self-auto px-3 py-2 rounded-lg border border-light/20 hover:bg-gray text-xs"
                         @click="addNewTag"
                     >
                         +
                     </button>
                 </div>
             </div>
-            <div class="grid grid-cols-2 gap-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 <div>
                     <label class="block text-xs text-light/50 mb-1">Due date</label>
                     <input 

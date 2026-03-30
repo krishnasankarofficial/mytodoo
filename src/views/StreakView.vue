@@ -13,9 +13,7 @@
             <p class="text-xs text-light/45 mb-4 text-left max-w-xl">
                 One square per day: darker green means more tasks completed that day.
             </p>
-            <div
-                class="rounded-xl border border-light/15 bg-gray/40 p-6 overflow-x-auto"
-            >
+            <div class="rounded-xl border border-light/15 bg-gray/40 p-4 sm:p-6 overflow-x-auto min-w-0">
             <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
                 <p class="text-xs text-light/60">Last 13 weeks · completions per day</p>
                 <div class="flex items-center gap-2 text-[10px] text-light/50">

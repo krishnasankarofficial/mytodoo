@@ -5,20 +5,26 @@
         role="dialog"
         aria-modal="true"
     >
-        <div class="bg-dark border border-light/30 rounded-2xl max-w-md w-full p-6 text-left shadow-xl">
+        <div
+            class="bg-dark border border-light/30 rounded-2xl max-w-md w-full max-h-[min(90dvh,100%)] overflow-y-auto p-5 sm:p-6 text-left shadow-xl"
+        >
             <h3 class="font-PoppinsBold text-lg mb-2">Import backup</h3>
             <p v-if="preview.valid" class="text-sm text-light/70 mb-4">
                 Schema v{{ preview.schemaVersion }} · {{ preview.taskCount }} tasks
                 <span v-if="preview.exportedAt"> · exported {{ preview.exportedAt }}</span>
             </p>
             <p v-if="preview.error" class="text-red text-sm mb-4">{{ preview.error }}</p>
-            <div class="flex gap-2 justify-end">
-                <button type="button" class="px-4 py-2 rounded-lg border border-light/25 hover:bg-gray" @click="cancel">
+            <div class="flex flex-col sm:flex-row gap-2 sm:justify-end sm:items-center">
+                <button
+                    type="button"
+                    class="w-full sm:w-auto px-4 py-2.5 rounded-lg border border-light/25 hover:bg-gray"
+                    @click="cancel"
+                >
                     Cancel
                 </button>
                 <button
                     type="button"
-                    class="px-4 py-2 rounded-lg bg-red text-dark font-PoppinsBold disabled:opacity-40"
+                    class="w-full sm:w-auto px-4 py-2.5 rounded-lg bg-red text-dark font-PoppinsBold disabled:opacity-40"
                     :disabled="!preview.valid"
                     @click="confirm"
                 >

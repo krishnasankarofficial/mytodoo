@@ -136,11 +136,15 @@ defineExpose({ showConfirm })
 
 <template>
     <div
-        class="min-h-screen w-full bg-dark text-light font-Poppins flex flex-col items-center pb-24 pt-16 px-4 transition-colors"
+        class="min-h-dvh w-full max-w-[100%] min-w-0 bg-dark text-light font-Poppins flex flex-col items-center pb-[calc(6rem+env(safe-area-inset-bottom,0px))] pt-[calc(8.5rem+env(safe-area-inset-top,0px))] sm:pt-[calc(5rem+env(safe-area-inset-top,0px))] px-3 sm:px-4 transition-colors"
     >
-        <header class="app-header fixed top-0 left-0 right-0 z-40 bg-dark/95 border-b border-light/10 backdrop-blur-sm">
-            <div class="max-w-3xl mx-auto flex flex-wrap items-center justify-between gap-3 px-4 py-3">
-                <h1 class="text-xl font-PoppinsBold tracking-tight m-0">
+        <header
+            class="app-header fixed top-0 left-0 right-0 z-40 bg-dark/95 border-b border-light/10 backdrop-blur-sm pt-[env(safe-area-inset-top,0px)]"
+        >
+            <div
+                class="max-w-3xl mx-auto flex flex-wrap items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 min-w-0"
+            >
+                <h1 class="order-1 text-lg sm:text-xl font-PoppinsBold tracking-tight m-0 min-w-0 shrink-0">
                     <RouterLink
                         to="/today"
                         class="flex items-center gap-2 text-inherit no-underline rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-red/80 focus-visible:ring-offset-2 focus-visible:ring-offset-dark"
@@ -156,7 +160,9 @@ defineExpose({ showConfirm })
                         Stride
                     </RouterLink>
                 </h1>
-                <div class="flex flex-wrap items-center gap-3 text-xs">
+                <div
+                    class="order-3 sm:order-2 flex flex-wrap items-center justify-center sm:justify-end gap-x-2 gap-y-2 text-[11px] sm:text-xs min-w-0 basis-full sm:basis-auto sm:flex-1 sm:min-w-0"
+                >
                     <Tooltip
                         text="Consecutive days with at least one completed task — open Streak for the full activity heatmap"
                         position="bottom"
@@ -201,22 +207,22 @@ defineExpose({ showConfirm })
                             Docs
                         </RouterLink>
                     </Tooltip>
-                    <Tooltip text="Toggle light / dark theme" position="bottom" inline>
-                        <button
-                            type="button"
-                            class="px-2 py-1 rounded border border-light/20 hover:bg-gray flex items-center gap-1.5"
-                            @click="toggleTheme"
-                        >
-                            <Sun v-if="app.preferences.theme === 'dark'" :size="14" />
-                            <Moon v-else :size="14" />
-                            {{ app.preferences.theme === "dark" ? "Light" : "Dark" }}
-                        </button>
-                    </Tooltip>
                 </div>
+                <Tooltip text="Toggle light / dark theme" position="bottom" inline class="order-2 ml-auto sm:order-3 sm:ml-0 shrink-0">
+                    <button
+                        type="button"
+                        class="px-2 py-1 rounded border border-light/20 hover:bg-gray flex items-center gap-1.5"
+                        @click="toggleTheme"
+                    >
+                        <Sun v-if="app.preferences.theme === 'dark'" :size="14" />
+                        <Moon v-else :size="14" />
+                        {{ app.preferences.theme === "dark" ? "Light" : "Dark" }}
+                    </button>
+                </Tooltip>
             </div>
         </header>
 
-        <main class="w-full max-w-3xl flex flex-col gap-4 flex-1">
+        <main class="w-full max-w-3xl min-w-0 flex flex-col gap-4 flex-1">
             <NavBar />
             <QuickAddBar />
             <div class="flex flex-col sm:flex-row gap-2 w-full">
@@ -348,7 +354,7 @@ defineExpose({ showConfirm })
             v-if="toastOpen"
             role="status"
             aria-live="polite"
-            class="fixed bottom-6 left-1/2 z-[60] max-w-[min(90vw,24rem)] -translate-x-1/2 rounded-xl border-2 px-4 py-3 text-center text-sm font-PoppinsBold shadow-lg md:text-base"
+            class="fixed bottom-[max(1.5rem,env(safe-area-inset-bottom,0px)+0.5rem)] left-1/2 z-[60] max-w-[min(90vw,24rem)] -translate-x-1/2 rounded-xl border-2 px-3 py-2.5 sm:px-4 sm:py-3 text-center text-sm font-PoppinsBold shadow-lg md:text-base"
             :class="toastIsError ? 'border-red bg-gray text-red' : 'border-light bg-gray text-light'"
         >
             {{ notification.message }}
