@@ -22,13 +22,22 @@ import { useAppStore } from "../stores/app.js"
 import TaskList from "../components/TaskList.vue"
 import EmptyState from "../components/EmptyState.vue"
 import { useFilteredTasks } from "../composables/useFilteredTasks.js"
+import { useConfirm } from "../composables/useConfirm.js"
 
 const app = useAppStore()
 const base = computed(() => app.trashedTasks)
 const filtered = useFilteredTasks(base)
+const { confirm } = useConfirm()
 
-function empty() {
-    if (!window.confirm("Permanently delete all trashed tasks?")) return
-    app.emptyTrash()
+async function empty() {
+    const confirmed = await confirm({
+        title: "Empty trash",
+        message: "Permanently delete all trashed tasks? This cannot be undone.",
+        confirmText: "Delete",
+        cancelText: "Cancel",
+    })
+    if (confirmed) {
+        app.emptyTrash()
+    }
 }
 </script>

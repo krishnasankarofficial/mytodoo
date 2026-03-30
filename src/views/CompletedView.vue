@@ -22,13 +22,22 @@ import { useAppStore } from "../stores/app.js"
 import TaskList from "../components/TaskList.vue"
 import EmptyState from "../components/EmptyState.vue"
 import { useFilteredTasks } from "../composables/useFilteredTasks.js"
+import { useConfirm } from "../composables/useConfirm.js"
 
 const app = useAppStore()
 const base = computed(() => app.completedTasks)
 const filtered = useFilteredTasks(base)
+const { confirm } = useConfirm()
 
-function clearDone() {
-    if (!window.confirm("Remove all completed tasks permanently?")) return
-    app.clearCompleted()
+async function clearDone() {
+    const confirmed = await confirm({
+        title: "Clear completed tasks",
+        message: "Remove all completed tasks permanently? This cannot be undone.",
+        confirmText: "Clear",
+        cancelText: "Cancel",
+    })
+    if (confirmed) {
+        app.clearCompleted()
+    }
 }
 </script>

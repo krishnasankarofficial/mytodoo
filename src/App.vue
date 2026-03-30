@@ -8,6 +8,7 @@ import Footer from "./components/Footer.vue"
 import Help from "./components/Help.vue"
 import ImportPreviewModal from "./components/ImportPreviewModal.vue"
 import ErrorBoundary from "./components/ErrorBoundary.vue"
+import ConfirmModal from "./components/ConfirmModal.vue"
 import { useUiStore } from "./stores/ui.js"
 import { useAppStore } from "./stores/app.js"
 import { parseAppState } from "./storage/schema.js"
@@ -22,6 +23,7 @@ const searchInput = ref("")
 const tagInput = ref("")
 const importFile = ref(null)
 const quickAddRef = ref(null)
+const confirmModal = ref(null)
 
 watch(
     () => searchInput.value,
@@ -120,6 +122,12 @@ const toastIsError = computed(() => notification.value.type === "error")
 useKeyboardShortcuts({
     onQuickAdd: () => document.getElementById("quick-add")?.focus(),
 })
+
+function showConfirm(options) {
+    return confirmModal.value?.show(options)
+}
+
+defineExpose({ showConfirm })
 </script>
 
 <template>
@@ -206,9 +214,10 @@ useKeyboardShortcuts({
             </ErrorBoundary>
         </main>
 
-        <Footer />
-        <Help />
-        <ImportPreviewModal />
+                <Footer />
+                <Help />
+                <ImportPreviewModal />
+                <ConfirmModal ref="confirmModal" />
 
         <div
             v-if="toastOpen"

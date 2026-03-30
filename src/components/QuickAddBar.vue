@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col sm:flex-row gap-2 w-full">
+    <form class="flex flex-col sm:flex-row gap-2 w-full" @submit.prevent="submit">
         <label class="sr-only" for="qa-priority">Priority</label>
         <select
             id="qa-priority"
@@ -14,33 +14,50 @@
         <div class="relative flex-1 min-w-0">
             <input
                 id="quick-add"
+                ref="inputRef"
                 v-model="text"
                 type="text"
-                class="w-full bg-gray text-light font-Poppins p-4 pr-24 outline-none rounded-3xl border border-transparent focus:border-light/30"
-                placeholder="Quick add… try “Call Sam tomorrow 3pm”"
-                @keydown.enter.prevent="submit"
+                name="quick-add-title"
+                autocomplete="off"
+                class="w-full bg-gray text-light font-Poppins p-4 pr-28 outline-none rounded-2xl border border-transparent focus:border-light/30"
+                placeholder="Quick add… try 'Call Sam tomorrow 3pm'"
             />
             <button
-                type="button"
-                class="absolute right-2 top-1/2 -translate-y-1/2 bg-red text-dark font-PoppinsBold text-sm px-4 py-2 rounded-xl hover:opacity-90"
-                @click="submit"
+                type="submit"
+                class="absolute right-2 top-1/2 z-20 -translate-y-1/2 bg-red text-dark font-PoppinsBold text-sm px-4 py-2 rounded-xl hover:opacity-90"
             >
                 Add
             </button>
         </div>
-    </div>
+    </form>
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref, onMounted } from "vue"
+import { useRouter } from "vue-router"
 import { useAppStore } from "../stores/app.js"
 import { useUiStore } from "../stores/ui.js"
 import { parseQuickAdd } from "../composables/useQuickAdd.js"
 
 const app = useAppStore()
 const ui = useUiStore()
+const router = useRouter()
 const text = ref("")
 const priority = ref("medium")
+const inputRef = ref(null)
+
+function focusInput() {
+    setTimeout(() => {
+        inputRef.value?.focus()
+    }, 100)
+}
+
+onMounted(() => {
+    focusInput()
+    router.afterEach(() => {
+        focusInput()
+    })
+})
 
 function submit() {
     const raw = text.value.trim()
@@ -48,13 +65,22 @@ function submit() {
         ui.notify("Enter a task first.", "error")
         return
     }
-    const { title, dueAt } = parseQuickAdd(raw)
-    app.addTask({
-        title,
-        dueAt,
-        priority: priority.value,
-    })
-    text.value = ""
-    ui.notify("Task added")
+    try {
+        const { title, dueAt } = parseQuickAdd(raw)
+        app.addTask({
+            title,
+            dueAt,
+            priority: priority.value,
+        })
+        text.value = ""
+        ui.notify("Task added")
+        focusInput()
+    } catch (e) {
+        const msg = e && typeof e.message === "string" ? e.message : "Could not add task."
+        ui.notify(msg, "error")
+        if (import.meta.env.DEV) {
+            console.error("[QuickAdd]", e)
+        }
+    }
 }
 </script>

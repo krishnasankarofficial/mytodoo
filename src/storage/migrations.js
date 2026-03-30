@@ -3,7 +3,10 @@ import { APP_SCHEMA_VERSION, createDefaultAppState, TaskSchema } from "./schema.
 export const LEGACY_STORAGE_KEY = "tasks"
 
 function newId() {
-    return crypto.randomUUID()
+    if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+        return crypto.randomUUID()
+    }
+    return `id-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`
 }
 
 /** @param {unknown} raw @param {number} i */

@@ -154,6 +154,7 @@
 import { ref, watch } from "vue"
 import dayjs from "dayjs"
 import { useAppStore } from "../stores/app.js"
+import { useConfirm } from "../composables/useConfirm.js"
 
 const props = defineProps({
     task: { type: Object, required: true },
@@ -161,6 +162,7 @@ const props = defineProps({
 })
 
 const app = useAppStore()
+const { confirm } = useConfirm()
 const editing = ref(false)
 const draft = ref({
     title: "",
@@ -223,8 +225,14 @@ function saveEdit() {
     editing.value = false
 }
 
-function confirmDelete() {
-    if (window.confirm("Permanently delete this task?")) {
+async function confirmDelete() {
+    const confirmed = await confirm({
+        title: "Delete task",
+        message: "Permanently delete this task? This cannot be undone.",
+        confirmText: "Delete",
+        cancelText: "Cancel",
+    })
+    if (confirmed) {
         app.deleteForever(props.task.id)
     }
 }

@@ -7,7 +7,10 @@ import { dayjs } from "../utils/dates.js"
 import { useUiStore } from "./ui.js"
 
 function newId() {
-    return crypto.randomUUID()
+    if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+        return crypto.randomUUID()
+    }
+    return `id-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`
 }
 
 function todayKey() {
@@ -101,7 +104,6 @@ export const useAppStore = defineStore("app", {
                 )
             }
         },
-        schedulePersist: null,
 
         initPersist() {
             if (this.schedulePersist) return
