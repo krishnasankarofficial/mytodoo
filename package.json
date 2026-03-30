@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "es6-promise": "^4.2.8",
-    "firebase": "^10.12.2",
     "moment": "^2.30.1",
     "vue": "^3.4.21",
     "vuex": "^4.1.0"

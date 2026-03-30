@@ -5,10 +5,7 @@
         <div class="w-full h-1 bg-gray"></div>
         <div class="flex flex-col gap-2 w-full overflow-auto p-2">
             <span class="w-full break-words text-start p-2 bg-gray rounded-xl">
-                <span class="font-PoppinsBold text-red">Offline mode:</span> Enable to manage tasks locally without internet connection.
-            </span>
-            <span class="w-full break-words text-start p-2 bg-gray rounded-xl">
-                <span class="font-PoppinsBold text-green">Online mode:</span> Enable to sync locally saved tasks to cloud and manage them realtime. 
+                <span class="font-PoppinsBold text-green">Local storage:</span> Your tasks are saved in this browser only. Clearing site data will remove them.
             </span>
             <span class="w-full break-words text-start p-2 bg-gray rounded-xl">
                 <span class="font-PoppinsBold text-green">Add task:</span> Write tasks in the input field.

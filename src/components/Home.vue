@@ -44,9 +44,7 @@
         computed: {
             ...mapState({
                 tasks: state => state.tasks,
-                localTasks: state => state.localTasks,
                 loading: state => state.loading,
-                userId: state => state.userId,
                 showHelp: state => state.showHelp,
             }),
             ...mapGetters([
@@ -56,7 +54,7 @@
             ])
         },
         methods: {
-            ...mapActions(['loadTasks', 'saveTasksLocal', 'addTask', 'updateTask', 'deleteTask', 'setLoading', 'setShowHelp', 'setAnonymousUser']),
+            ...mapActions(['loadTasks', 'saveTasksLocal', 'addTask', 'updateTask', 'deleteTask', 'setLoading', 'setShowHelp']),
             updateDate(date){
                 const givenDate = moment(date);
                 const today = moment();
@@ -76,7 +74,6 @@
                     const newTask = {
                         'task_id': this.tasks.length+1,
                         'task': this.taskInput,
-                        'user_id': this.userId,
                         'status': false,
                         'edit': false,
                         'created_at': new Date(),
@@ -94,7 +91,6 @@
                 this.tasks[index].edit = false
                 const task = {
                     'id': this.tasks[index].id?this.tasks[index].id:'',
-                    'user_id': this.userId,
                     'task_id': this.tasks[index].task_id,
                     'task': this.tasks[index].task,
                     'status': this.tasks[index].status,
@@ -106,8 +102,7 @@
             },
             handleDeleteTask(index) {
                 this.setLoading(true)
-                const id = this.tasks[index].task_id
-                this.deleteTask({index, id});
+                this.deleteTask({index});
             },
             handleCommands() {
                 window.addEventListener('keyup', (event) => {
@@ -121,7 +116,6 @@
             },
         },
         mounted() {
-            this.setAnonymousUser()
             this.$refs.taskInput.focus()
             this.timer = setInterval(this.updateCurrentDateTime, 1000)
             this.loadTasks()
