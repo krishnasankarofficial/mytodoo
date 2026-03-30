@@ -151,7 +151,7 @@ defineExpose({ showConfirm })
                     >
                         <img
                             :src="logoSrc"
-                            alt=""
+                            alt="Stride"
                             width="28"
                             height="28"
                             class="shrink-0 size-7 rounded-lg"

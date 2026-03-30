@@ -10,11 +10,12 @@ export default defineConfig({
         vue(),
         VitePWA({
             registerType: "autoUpdate",
-            includeAssets: ["favicon.svg"],
+            includeAssets: ["favicon.svg", "og-image.svg", "sitemap.xml", "robots.txt"],
             manifest: {
                 name: "Stride",
                 short_name: "Stride",
-                description: "Local-first tasks",
+                description:
+                    "Private task list: natural-language due dates, tags, Pomodoro focus, and streaks. Data stays in your browser.",
                 theme_color: "#0D0D0D",
                 background_color: "#0D0D0D",
                 display: "standalone",
