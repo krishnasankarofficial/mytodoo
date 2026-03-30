@@ -122,8 +122,8 @@
                 <h3 class="font-PoppinsBold text-green mb-2">💾 Data & Storage</h3>
                 <div class="space-y-2 text-light/90 text-xs">
                     <div>
-                        <strong class="text-light">Local-first storage</strong>
-                        <p class="text-light/70 mt-0.5">All data stays in your browser. No server, no account needed.</p>
+                        <strong class="text-light">Browser-only storage</strong>
+                        <p class="text-light/70 mt-0.5">Your tasks stay on this device only. No account, no cloud, completely private.</p>
                     </div>
                     <div>
                         <strong class="text-light">Auto-save</strong>

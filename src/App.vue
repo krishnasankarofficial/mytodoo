@@ -43,7 +43,7 @@ onMounted(() => {
     try {
         if (!localStorage.getItem(INTRO_KEY)) {
             localStorage.setItem(INTRO_KEY, "1")
-            ui.notify("Tasks are stored in this browser only. Clearing site data will remove them.")
+            ui.notify("Your tasks are saved on this device only. Clearing browser data will delete them.")
         }
     } catch {
         /* ignore */

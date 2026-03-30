@@ -2,7 +2,7 @@
     <div class="text-center fixed text-xs lg:text-sm bottom-0 w-full min-h-10 bg-dark flex flex-row items-center justify-center gap-4 p-6 z-50 border-t border-light/10">
         <span class="font-PoppinsBold flex-1 text-start">&copy; {{ year }} Stride</span>
         <span class="text-light/80 hidden sm:inline"
-            >Local-first · Built by
+            >Private & offline · Built by
             <a
                 href="https://krishnasankar.vercel.app"
                 target="_blank"
