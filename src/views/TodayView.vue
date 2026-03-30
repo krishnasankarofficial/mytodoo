@@ -5,7 +5,7 @@
             Overdue and due today · {{ filtered.length }} shown
         </p>
         <TaskList v-if="filtered.length" :tasks="filtered" variant="active" />
-        <EmptyState v-else title="You're clear for now" hint="Add a task or check Upcoming." icon="✨" />
+        <EmptyState v-else title="You're clear for now" hint="Add a task or check Upcoming." />
     </section>
 </template>
 

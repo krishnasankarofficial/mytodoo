@@ -13,7 +13,7 @@
             </button>
         </div>
         <TaskList v-if="filtered.length" :tasks="filtered" variant="completed" />
-        <EmptyState v-else title="No completed tasks yet" icon="✅" />
+        <EmptyState v-else title="No completed tasks yet" />
     </section>
 </template>
 

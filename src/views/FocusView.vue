@@ -46,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <EmptyState v-else title="Nothing to focus" hint="Add an open task with a due date or check All." icon="🎯" />
+        <EmptyState v-else title="Nothing to focus" hint="Add an open task with a due date or check All." />
     </section>
 </template>
 

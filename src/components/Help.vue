@@ -52,7 +52,7 @@
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
-                <h3 class="font-PoppinsBold text-green mb-2">✨ Quick Add</h3>
+                <h3 class="font-PoppinsBold text-green mb-2">Quick Add</h3>
                 <p class="text-light/90 mb-2 text-xs">Type naturally — dates are parsed automatically. Press Enter or click Add.</p>
                 <div class="space-y-1 text-light/70 text-[11px] font-mono bg-dark/50 p-2 rounded">
                     <div>"Call Sam tomorrow 3pm"</div>
@@ -89,7 +89,7 @@
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
-                <h3 class="font-PoppinsBold text-green mb-2">🎯 Views</h3>
+                <h3 class="font-PoppinsBold text-green mb-2">Views</h3>
                 <div class="space-y-1.5 text-xs">
                     <div class="flex items-start gap-2">
                         <strong class="text-light min-w-[80px]">Today</strong>
@@ -178,7 +178,7 @@
                 <h3 class="font-PoppinsBold text-green mb-2">📊 Productivity Tracking</h3>
                 <div class="space-y-2 text-xs">
                     <div>
-                        <strong class="text-light">🔥 Streak</strong>
+                        <strong class="text-light">Streak</strong>
                         <p class="text-light/70 mt-0.5">Consecutive days with at least one completed task. Shown in header.</p>
                     </div>
                     <div>

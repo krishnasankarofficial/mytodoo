@@ -2,7 +2,7 @@
     <section>
         <h2 class="text-xl font-PoppinsBold mb-3 text-left">All open tasks</h2>
         <TaskList v-if="filtered.length" :tasks="filtered" variant="active" />
-        <EmptyState v-else title="No active tasks" icon="🎯" />
+        <EmptyState v-else title="No active tasks" />
     </section>
 </template>
 

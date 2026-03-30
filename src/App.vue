@@ -138,15 +138,14 @@ defineExpose({ showConfirm })
         <header class="app-header fixed top-0 left-0 right-0 z-40 bg-dark/95 border-b border-light/10 backdrop-blur-sm">
             <div class="max-w-3xl mx-auto flex flex-wrap items-center justify-between gap-3 px-4 py-3">
                 <h1 class="text-xl font-PoppinsBold tracking-tight flex items-center gap-2">
-                    <span class="text-red">⚡</span>
                     Stride
                 </h1>
                 <div class="flex flex-wrap items-center gap-3 text-xs">
                     <span class="text-light/60 flex items-center gap-1">
-                        🔥 Streak {{ app.preferences.streakDays }}d
+                        Streak {{ app.preferences.streakDays }}d
                     </span>
                     <span class="text-light/60 flex items-center gap-1">
-                        📊 Today {{ app.dailyProgressPercent }}%
+                        Today {{ app.dailyProgressPercent }}%
                     </span>
                     <button
                         type="button"
