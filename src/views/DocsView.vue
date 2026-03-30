@@ -4,7 +4,7 @@
             <h2 class="text-xl font-PoppinsBold mb-2">Documentation</h2>
             <p class="text-sm text-light/50 max-w-xl">
                 How Stride works: shortcuts, tasks, storage, Focus mode, and more. Open anytime from the header or press
-                <kbd class="px-1.5 py-0.5 rounded bg-gray border border-light/25 font-mono text-[11px]">Alt+H</kbd>.
+                <kbd class="px-1.5 py-0.5 rounded bg-gray border border-light/25 font-mono text-[11px]">Alt+7</kbd>.
             </p>
         </div>
 
@@ -75,7 +75,7 @@
                         <BookOpen :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
                         This documentation page
                     </span>
-                    <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs shrink-0">Alt+H</kbd>
+                    <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs shrink-0">Alt+7</kbd>
                 </div>
             </div>
         </section>

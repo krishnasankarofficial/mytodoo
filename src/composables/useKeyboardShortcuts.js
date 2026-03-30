@@ -5,10 +5,14 @@ export function useKeyboardShortcuts({ onQuickAdd } = {}) {
     const router = useRouter()
 
     function handler(e) {
-        if (e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || e.target.isContentEditable)) {
+        const inTextField =
+            e.target &&
+            (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || e.target.isContentEditable)
+        // Still allow Alt+ shortcuts while typing (views, docs, focus, quick-add refocus)
+        if (inTextField && !e.altKey) {
             return
         }
-        if (e.altKey && e.key.toLowerCase() === "h") {
+        if (e.altKey && e.key === "7") {
             e.preventDefault()
             router.push("/docs")
         }

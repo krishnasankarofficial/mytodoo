@@ -191,7 +191,7 @@ defineExpose({ showConfirm })
                             About
                         </RouterLink>
                     </Tooltip>
-                    <Tooltip text="Shortcuts, features, storage — full reference (Alt+H)" position="bottom" inline wrap>
+                    <Tooltip text="Shortcuts, features, storage — full reference (Alt+7)" position="bottom" inline wrap>
                         <RouterLink
                             to="/docs"
                             class="text-light/60 flex items-center gap-1.5 border-b border-dotted border-light/25 hover:text-light/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green/60 rounded-sm"
