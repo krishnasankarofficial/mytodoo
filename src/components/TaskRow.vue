@@ -28,7 +28,8 @@
                         </h3>
                         <span
                             v-if="task.priority !== 'none'"
-                            class="text-[10px] uppercase px-2 py-0.5 rounded border border-light/20 text-light/70"
+                            class="text-[10px] uppercase px-2 py-0.5 rounded border font-PoppinsBold"
+                            :class="getPriorityClass(task.priority)"
                             >{{ task.priority }}</span
                         >
                     </div>
@@ -143,6 +144,7 @@
                 </div>
                 <div class="flex gap-2">
                     <select
+                        v-if="availableTags.length > 0"
                         ref="existingTagSelect"
                         class="flex-1 bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm"
                         @change="onExistingTagSelect"
@@ -156,7 +158,8 @@
                         v-model="newTagInput"
                         type="text"
                         placeholder="New tag"
-                        class="flex-1 bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm"
+                        :class="availableTags.length > 0 ? 'flex-1' : 'flex-[2]'"
+                        class="bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm"
                         @keydown.enter.prevent="addNewTag"
                     />
                     <button
@@ -229,6 +232,17 @@ const draft = ref({
     intervalDays: 2,
     priority: "none",
 })
+
+const priorityColors = {
+    high: "bg-red/20 text-red border-red/40",
+    medium: "bg-yellow-500/20 text-yellow-400 border-yellow-500/40",
+    low: "bg-blue-500/20 text-blue-400 border-blue-500/40",
+    none: "border-light/20 text-light/70",
+}
+
+function getPriorityClass(priority) {
+    return priorityColors[priority] || priorityColors.none
+}
 
 watch(
     () => props.task,

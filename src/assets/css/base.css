@@ -233,3 +233,23 @@ html.light input[type="checkbox"]:hover {
 html.light input[type="checkbox"]:checked::after {
     border-color: #ffffff;
 }
+
+/* Priority badge colors for light mode */
+html.light .text-yellow-400 {
+    color: #ca8a04 !important;
+}
+html.light .text-blue-400 {
+    color: #2563eb !important;
+}
+html.light .bg-yellow-500\/20 {
+    background-color: rgba(234, 179, 8, 0.2) !important;
+}
+html.light .bg-blue-500\/20 {
+    background-color: rgba(37, 99, 235, 0.2) !important;
+}
+html.light .border-yellow-500\/40 {
+    border-color: rgba(234, 179, 8, 0.4) !important;
+}
+html.light .border-blue-500\/40 {
+    border-color: rgba(37, 99, 235, 0.4) !important;
+}
