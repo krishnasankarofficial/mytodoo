@@ -16,7 +16,7 @@
                         <input
                             v-if="variant === 'active'"
                             type="checkbox"
-                            class="accent-red w-4 h-4 mt-0.5 shrink-0"
+                            class="mt-0.5"
                             :checked="false"
                             @change="onComplete"
                         />

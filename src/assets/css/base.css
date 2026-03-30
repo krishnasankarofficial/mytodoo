@@ -28,6 +28,27 @@ html.light .bg-gray {
 html.light .text-light {
     color: #1c1917 !important;
 }
+html.light .text-light\/90 {
+    color: rgba(28, 25, 23, 0.9) !important;
+}
+html.light .text-light\/80 {
+    color: rgba(28, 25, 23, 0.8) !important;
+}
+html.light .text-light\/70 {
+    color: rgba(28, 25, 23, 0.7) !important;
+}
+html.light .text-light\/60 {
+    color: rgba(28, 25, 23, 0.6) !important;
+}
+html.light .text-light\/50 {
+    color: rgba(28, 25, 23, 0.5) !important;
+}
+html.light .text-light\/40 {
+    color: rgba(28, 25, 23, 0.4) !important;
+}
+html.light .text-light\/30 {
+    color: rgba(28, 25, 23, 0.3) !important;
+}
 html.light .border-light\/80,
 html.light .border-light\/30,
 html.light .border-light\/20,
@@ -37,6 +58,55 @@ html.light .border-light\/10 {
 }
 html.light .app-header {
     background-color: rgba(231, 229, 228, 0.95) !important;
+}
+html.light .text-red {
+    color: #dc2626 !important;
+}
+html.light .text-green {
+    color: #16a34a !important;
+}
+html.light .bg-red {
+    background-color: #dc2626 !important;
+}
+html.light .bg-green {
+    background-color: #16a34a !important;
+}
+html.light .border-red\/50,
+html.light .border-red\/40 {
+    border-color: rgba(220, 38, 38, 0.4) !important;
+}
+html.light .border-green\/40 {
+    border-color: rgba(22, 163, 74, 0.4) !important;
+}
+html.light .hover\:bg-red\/10:hover {
+    background-color: rgba(220, 38, 38, 0.1) !important;
+}
+html.light .hover\:text-red:hover {
+    color: #dc2626 !important;
+}
+html.light .bg-gray\/80 {
+    background-color: rgba(220, 214, 209, 0.8) !important;
+}
+html.light .bg-gray\/40 {
+    background-color: rgba(220, 214, 209, 0.4) !important;
+}
+html.light .bg-gray\/30 {
+    background-color: rgba(220, 214, 209, 0.3) !important;
+}
+html.light .bg-gray\/50 {
+    background-color: rgba(220, 214, 209, 0.5) !important;
+}
+html.light .border-gray {
+    border-color: #a8a29e !important;
+}
+html.light .hover\:bg-gray:hover {
+    background-color: #dcd6d1 !important;
+}
+html.light .bg-light {
+    background-color: #f5f5f4 !important;
+}
+html.light .bg-light\/10 {
+    background-color: rgba(245, 245, 244, 0.1) !important;
 }
 ::-webkit-scrollbar{
     width: 10px;
@@ -54,6 +124,12 @@ html.light .app-header {
     cursor: pointer;
     border-radius: 50px;
 }
+html.light ::-webkit-scrollbar-track {
+    background-color: #e7e5e4;
+}
+html.light ::-webkit-scrollbar-thumb {
+    background-color: #a8a29e;
+}
 @keyframes scaleVertically {
     0% {
         transform-origin: top;
@@ -62,4 +138,60 @@ html.light .app-header {
     100% {
         transform: scaleY(100%);
     }
+}
+
+/* Custom checkbox styles */
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid rgba(200, 186, 160, 0.4);
+    border-radius: 0.375rem;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+input[type="checkbox"]:hover {
+    border-color: rgba(200, 186, 160, 0.6);
+    background-color: rgba(200, 186, 160, 0.05);
+}
+
+input[type="checkbox"]:checked {
+    background-color: #FF6B6B;
+    border-color: #FF6B6B;
+}
+
+input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 0.35rem;
+    height: 0.65rem;
+    border: solid #0D0D0D;
+    border-width: 0 2px 2px 0;
+}
+
+input[type="checkbox"].accent-green:checked {
+    background-color: #4ADE80;
+    border-color: #4ADE80;
+}
+
+/* Light mode checkbox */
+html.light input[type="checkbox"] {
+    border-color: rgba(28, 25, 23, 0.3);
+}
+
+html.light input[type="checkbox"]:hover {
+    border-color: rgba(28, 25, 23, 0.5);
+    background-color: rgba(28, 25, 23, 0.05);
+}
+
+html.light input[type="checkbox"]:checked::after {
+    border-color: #ffffff;
 }
