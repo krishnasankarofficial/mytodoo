@@ -1,4 +1,4 @@
-/** Route path → tooltip (view + shortcut). Keep in sync with useKeyboardShortcuts & Help. */
+/** Route path → tooltip (view + shortcut). Keep in sync with useKeyboardShortcuts & Docs. */
 export const NAV_SHORTCUT_LABELS = {
     "/today": "Today — overdue + due today · Alt+1",
     "/upcoming": "Upcoming — future due dates · Alt+2",

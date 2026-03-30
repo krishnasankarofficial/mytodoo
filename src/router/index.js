@@ -7,6 +7,8 @@ const TrashView = () => import("../views/TrashView.vue")
 const FocusView = () => import("../views/FocusView.vue")
 const AllView = () => import("../views/AllView.vue")
 const StreakView = () => import("../views/StreakView.vue")
+const AboutView = () => import("../views/AboutView.vue")
+const DocsView = () => import("../views/DocsView.vue")
 
 export const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +21,8 @@ export const router = createRouter({
         { path: "/focus", name: "focus", component: FocusView, meta: { title: "Focus" } },
         { path: "/all", name: "all", component: AllView, meta: { title: "All" } },
         { path: "/streak", name: "streak", component: StreakView, meta: { title: "Streak" } },
+        { path: "/about", name: "about", component: AboutView, meta: { title: "About" } },
+        { path: "/docs", name: "docs", component: DocsView, meta: { title: "Documentation" } },
     ],
     scrollBehavior() {
         return { top: 0 }

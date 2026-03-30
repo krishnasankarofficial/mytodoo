@@ -1,24 +1,16 @@
 import { onMounted, onUnmounted } from "vue"
 import { useRouter } from "vue-router"
-import { useUiStore } from "../stores/ui.js"
 
 export function useKeyboardShortcuts({ onQuickAdd } = {}) {
     const router = useRouter()
-    const ui = useUiStore()
 
     function handler(e) {
         if (e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || e.target.isContentEditable)) {
-            if (e.key === "Escape") {
-                ui.setShowHelp(false)
-            }
             return
         }
         if (e.altKey && e.key.toLowerCase() === "h") {
             e.preventDefault()
-            ui.setShowHelp(true)
-        }
-        if (e.key === "Escape") {
-            ui.setShowHelp(false)
+            router.push("/docs")
         }
         if (e.altKey && e.key === "1") {
             e.preventDefault()

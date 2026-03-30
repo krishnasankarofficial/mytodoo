@@ -3,7 +3,6 @@ import { defineStore } from "pinia"
 export const useUiStore = defineStore("ui", {
     state: () => ({
         loading: false,
-        showHelp: false,
         toastOpen: false,
         notification: { message: "", type: "normal" },
         focusTaskId: null,
@@ -14,9 +13,6 @@ export const useUiStore = defineStore("ui", {
     actions: {
         setLoading(v) {
             this.loading = v
-        },
-        setShowHelp(v) {
-            this.showHelp = v
         },
         notify(message, type = "normal") {
             this.notification = { message, type }

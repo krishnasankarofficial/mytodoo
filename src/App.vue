@@ -2,12 +2,11 @@
 import { ref, computed, onMounted, watch } from "vue"
 import { storeToRefs } from "pinia"
 import { RouterView, RouterLink } from "vue-router"
-import { Search, Tag, Download, Upload, Sun, Moon, Flame, CalendarCheck } from "lucide-vue-next"
+import { Search, Tag, Download, Upload, Sun, Moon, Flame, CalendarCheck, Info, BookOpen } from "lucide-vue-next"
 import NavBar from "./components/NavBar.vue"
 import Tooltip from "./components/Tooltip.vue"
 import QuickAddBar from "./components/QuickAddBar.vue"
 import Footer from "./components/Footer.vue"
-import Help from "./components/Help.vue"
 import ImportPreviewModal from "./components/ImportPreviewModal.vue"
 import ErrorBoundary from "./components/ErrorBoundary.vue"
 import ConfirmModal from "./components/ConfirmModal.vue"
@@ -182,6 +181,25 @@ defineExpose({ showConfirm })
                             Today {{ app.dailyProgressPercent }}%
                         </span>
                     </Tooltip>
+                    <span class="text-light/25 hidden sm:inline select-none" aria-hidden="true">|</span>
+                    <Tooltip text="What Stride is, privacy, and credits" position="bottom" inline wrap>
+                        <RouterLink
+                            to="/about"
+                            class="text-light/60 flex items-center gap-1.5 border-b border-dotted border-light/25 hover:text-light/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green/60 rounded-sm"
+                        >
+                            <Info :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
+                            About
+                        </RouterLink>
+                    </Tooltip>
+                    <Tooltip text="Shortcuts, features, storage — full reference (Alt+H)" position="bottom" inline wrap>
+                        <RouterLink
+                            to="/docs"
+                            class="text-light/60 flex items-center gap-1.5 border-b border-dotted border-light/25 hover:text-light/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green/60 rounded-sm"
+                        >
+                            <BookOpen :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
+                            Docs
+                        </RouterLink>
+                    </Tooltip>
                     <Tooltip text="Toggle light / dark theme" position="bottom" inline>
                         <button
                             type="button"
@@ -304,7 +322,6 @@ defineExpose({ showConfirm })
         </main>
 
                 <Footer />
-                <Help />
                 <ImportPreviewModal />
                 <ConfirmModal ref="confirmModal" />
 

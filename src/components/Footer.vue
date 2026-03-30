@@ -4,7 +4,7 @@
         <span class="text-light/80 hidden sm:inline"
             >Private & offline · Built by
             <a
-                href="https://krishnasankar.vercel.app"
+                href="https://www.krishnasankar.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="font-PoppinsBold text-light hover:text-red transition-colors duration-200"
@@ -21,20 +21,11 @@
             >
                 <button
                     type="button"
-                    class="text-[10px] px-2 py-1 rounded border border-light/20 hover:bg-gray hidden sm:inline flex items-center gap-1"
+                    class="text-[10px] px-2 py-1 rounded border border-light/20 hover:bg-gray hidden sm:inline-flex items-center gap-1"
                     @click="requestNotif"
                 >
                     <Bell :size="12" />
                     Notify
-                </button>
-            </Tooltip>
-            <Tooltip text="Help & shortcuts (Alt+H)" position="top" inline>
-                <button
-                    type="button"
-                    class="flex cursor-pointer items-center justify-center rounded-full bg-light bg-opacity-10 text-red transition-opacity hover:bg-opacity-20 w-8 h-8 lg:h-10 lg:w-10"
-                    @click="ui.setShowHelp(true)"
-                >
-                    <HelpCircle :size="20" :stroke-width="2.5" />
                 </button>
             </Tooltip>
         </div>
@@ -42,9 +33,9 @@
 </template>
 
 <script setup>
-import { Bell, HelpCircle } from "lucide-vue-next"
-import { useUiStore } from "../stores/ui.js"
+import { Bell } from "lucide-vue-next"
 import Tooltip from "./Tooltip.vue"
+import { useUiStore } from "../stores/ui.js"
 
 const ui = useUiStore()
 const year = new Date().getFullYear()
