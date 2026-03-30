@@ -17,23 +17,22 @@
                 <h3 class="text-sm font-PoppinsBold text-light/90 mb-1">Completions per week</h3>
                 <p class="text-xs text-light/45 mb-4">Last 12 weeks · total tasks completed</p>
                 <div class="flex items-end gap-1 sm:gap-1.5 h-36 px-0.5">
-                    <div
+                    <Tooltip
                         v-for="(w, i) in analytics.weeklyTotals"
                         :key="i"
+                        :text="`${w.label}: ${w.total} completion${w.total === 1 ? '' : 's'}`"
+                        position="top"
+                        inline
                         class="flex-1 flex flex-col justify-end h-full min-w-0 group"
                     >
                         <div
                             class="w-full rounded-t bg-green/75 hover:bg-green transition-[height,background-color] min-h-[2px] origin-bottom"
                             :style="{ height: `${(w.total / analytics.maxWeekly) * 100}%` }"
-                            :title="`${w.label}: ${w.total} completion${w.total === 1 ? '' : 's'}`"
                         />
-                        <span
-                            class="text-[8px] sm:text-[9px] text-light/40 text-center mt-1 truncate w-full leading-tight"
-                            :title="w.label"
-                        >
+                        <span class="text-[8px] sm:text-[9px] text-light/40 text-center mt-1 truncate w-full leading-tight">
                             {{ w.label }}
                         </span>
-                    </div>
+                    </Tooltip>
                 </div>
             </div>
 
@@ -41,18 +40,20 @@
                 <h3 class="text-sm font-PoppinsBold text-light/90 mb-1">By day of week</h3>
                 <p class="text-xs text-light/45 mb-4">Last 13 weeks · when you finish tasks</p>
                 <div class="flex items-end justify-between gap-1 sm:gap-2 h-36 px-1">
-                    <div
+                    <Tooltip
                         v-for="(count, di) in analytics.weekdayCounts"
                         :key="di"
+                        :text="`${analytics.weekdayLabels[di]}: ${count} completion${count === 1 ? '' : 's'}`"
+                        position="top"
+                        inline
                         class="flex-1 flex flex-col justify-end h-full min-w-0 items-center"
                     >
                         <div
                             class="w-full max-w-[2.25rem] rounded-t bg-green/70 hover:bg-green/90 transition min-h-[2px]"
                             :style="{ height: `${(count / analytics.maxWeekday) * 100}%` }"
-                            :title="`${analytics.weekdayLabels[di]}: ${count}`"
                         />
                         <span class="text-[9px] text-light/45 mt-1.5">{{ analytics.weekdayLabels[di] }}</span>
-                    </div>
+                    </Tooltip>
                 </div>
             </div>
         </div>
@@ -61,18 +62,20 @@
             <h3 class="text-sm font-PoppinsBold text-light/90 mb-1">Last 30 days</h3>
             <p class="text-xs text-light/45 mb-4">Daily completion count · today on the right</p>
             <div class="flex items-end gap-px sm:gap-0.5 h-28 w-full overflow-x-auto pb-1">
-                <div
+                <Tooltip
                     v-for="day in analytics.last30Days"
                     :key="day.key"
+                    :text="`${day.key}: ${day.count} completion${day.count === 1 ? '' : 's'}`"
+                    position="top"
+                    inline
                     class="flex-1 min-w-[6px] sm:min-w-[8px] flex flex-col justify-end h-full"
                 >
                     <div
                         class="w-full rounded-t-[1px] bg-green/60 hover:bg-green/90 transition min-h-[1px]"
                         :class="day.count === 0 ? 'bg-light/10 hover:bg-light/15' : ''"
                         :style="{ height: `${(day.count / analytics.maxLast30) * 100}%` }"
-                        :title="`${day.key}: ${day.count} completion${day.count === 1 ? '' : 's'}`"
                     />
-                </div>
+                </Tooltip>
             </div>
             <div class="flex justify-between text-[9px] text-light/35 mt-2 px-0.5">
                 <span>30 days ago</span>
@@ -86,6 +89,7 @@
 import { computed } from "vue"
 import { storeToRefs } from "pinia"
 import { useAppStore } from "../stores/app.js"
+import Tooltip from "./Tooltip.vue"
 
 const app = useAppStore()
 const { streakAnalytics: analytics, preferences } = storeToRefs(app)
