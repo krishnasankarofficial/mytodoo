@@ -1,26 +1,17 @@
-import './assets/css/base.css'
-import 'es6-promise/auto'
+import "./assets/css/base.css"
 
-// Vuetify
-import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
+import { createApp } from "vue"
+import App from "./App.vue"
+import store from "./store/index.js"
 
+const app = createApp(App)
 
-// Vuex
-import store from './store/index.js'
+app.use(store)
 
+app.config.errorHandler = (err, _instance, info) => {
+    if (import.meta.env.DEV) {
+        console.error("[Vue error]", err, info)
+    }
+}
 
-import { createApp } from 'vue'
-import App from './App.vue'
-
-const vuetify = createVuetify({
-    components,
-    directives,
-
-})
-
-createApp(App).use(
-  store,
-  vuetify,
-).mount('#app')
+app.mount("#app")

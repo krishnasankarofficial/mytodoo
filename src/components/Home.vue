@@ -51,6 +51,7 @@
                 'tasksTotalCount',
                 'tasksCompletedCount',
                 'tasksPendingCount',
+                'nextTaskId',
             ])
         },
         methods: {
@@ -69,11 +70,11 @@
                 this.currentDateTime = moment(new Date()).format('MMMM DD, YYYY, h:mm:ss a')
             },
             handleAddTask() {
-                if(this.taskInput != '') {
+                if (this.taskInput.trim() !== "") {
                     this.setLoading(true)
                     const newTask = {
-                        'task_id': this.tasks.length+1,
-                        'task': this.taskInput,
+                        'task_id': this.nextTaskId,
+                        'task': this.taskInput.trim(),
                         'status': false,
                         'edit': false,
                         'created_at': new Date(),
@@ -104,24 +105,24 @@
                 this.setLoading(true)
                 this.deleteTask({index});
             },
-            handleCommands() {
-                window.addEventListener('keyup', (event) => {
-                    if(event.key==="h" && event.altKey){
-                        this.setShowHelp(true)
-                    }
-                    if(event.key==="Escape"){
-                        this.setShowHelp(false)
-                    }
-                })
+            onDocumentKeyup(event) {
+                if (event.key === "h" && event.altKey) {
+                    this.setShowHelp(true)
+                }
+                if (event.key === "Escape") {
+                    this.setShowHelp(false)
+                }
             },
         },
         mounted() {
             this.$refs.taskInput.focus()
             this.timer = setInterval(this.updateCurrentDateTime, 1000)
             this.loadTasks()
+            window.addEventListener("keyup", this.onDocumentKeyup)
         },
-        beforeDestroy() {
+        beforeUnmount() {
             clearInterval(this.timer)
+            window.removeEventListener("keyup", this.onDocumentKeyup)
         },
     }
 </script>
@@ -154,7 +155,6 @@
                     id="task-input"
                     placeholder="Add Task Here"
                     ref="taskInput"
-                    @keydown="handleCommands()"
                     @keypress.enter="handleAddTask"
                 />
                 <button
