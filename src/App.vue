@@ -2,7 +2,7 @@
 import { ref, computed, onMounted, watch } from "vue"
 import { storeToRefs } from "pinia"
 import { RouterView } from "vue-router"
-import { Search, Tag, Download, Upload, Sun, Moon } from "lucide-vue-next"
+import { Search, Tag, Download, Upload, Sun, Moon, Flame, CalendarCheck } from "lucide-vue-next"
 import NavBar from "./components/NavBar.vue"
 import QuickAddBar from "./components/QuickAddBar.vue"
 import StreakHeatmapPopover from "./components/StreakHeatmapPopover.vue"
@@ -143,11 +143,13 @@ defineExpose({ showConfirm })
                 </h1>
                 <div class="flex flex-wrap items-center gap-3 text-xs">
                     <StreakHeatmapPopover>
-                        <span class="text-light/60 flex items-center gap-1 cursor-default border-b border-dotted border-light/25 hover:text-light/80">
+                        <span class="text-light/60 flex items-center gap-1.5 cursor-default border-b border-dotted border-light/25 hover:text-light/80">
+                            <Flame :size="14" :stroke-width="2.25" class="shrink-0 text-green/90" aria-hidden="true" />
                             Streak {{ app.preferences.streakDays }}d
                         </span>
                     </StreakHeatmapPopover>
-                    <span class="text-light/60 flex items-center gap-1">
+                    <span class="text-light/60 flex items-center gap-1.5">
+                        <CalendarCheck :size="14" :stroke-width="2.25" class="shrink-0 text-green/90" aria-hidden="true" />
                         Today {{ app.dailyProgressPercent }}%
                     </span>
                     <button

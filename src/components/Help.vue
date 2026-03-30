@@ -6,7 +6,11 @@
         class="w-80 lg:w-[min(32rem,90vw)] max-h-[85vh] flex flex-col items-stretch bg-dark border border-light/80 shadow-xl p-0 fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 rounded-2xl overflow-hidden"
     >
         <div class="flex items-center justify-between gap-2 px-4 py-3 border-b border-gray">
-            <h2 id="help-title" class="font-PoppinsBold text-lg">Help &amp; Shortcuts</h2>
+            <h2 id="help-title" class="font-PoppinsBold text-lg flex items-center gap-2">
+                <HelpCircle :size="22" :stroke-width="2.25" class="shrink-0 text-green" aria-hidden="true" />
+                <span>Help &amp; Shortcuts</span>
+                <Keyboard :size="18" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
+            </h2>
             <button
                 type="button"
                 class="min-w-[2rem] min-h-[2rem] rounded-full bg-red text-dark font-PoppinsBold text-sm hover:opacity-90 flex items-center justify-center"
@@ -18,41 +22,68 @@
         </div>
         <div class="flex flex-col gap-3 w-full overflow-y-auto p-4 text-sm text-left">
             <section class="p-3 bg-gray rounded-xl">
-                <h3 class="font-PoppinsBold text-green mb-2">Keyboard shortcuts</h3>
+                <h3 class="font-PoppinsBold text-green mb-2 flex items-center gap-2">
+                    <Keyboard :size="16" :stroke-width="2.25" class="shrink-0" aria-hidden="true" />
+                    Keyboard shortcuts
+                </h3>
                 <div class="space-y-1.5 text-light/90">
-                    <div class="flex justify-between items-center">
-                        <span>Today view</span>
-                        <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs">Alt+1</kbd>
+                    <div class="flex justify-between items-center gap-2">
+                        <span class="flex items-center gap-2 min-w-0">
+                            <CalendarDays :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
+                            Today view
+                        </span>
+                        <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs shrink-0">Alt+1</kbd>
                     </div>
-                    <div class="flex justify-between items-center">
-                        <span>Upcoming view</span>
-                        <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs">Alt+2</kbd>
+                    <div class="flex justify-between items-center gap-2">
+                        <span class="flex items-center gap-2 min-w-0">
+                            <CalendarClock :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
+                            Upcoming view
+                        </span>
+                        <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs shrink-0">Alt+2</kbd>
                     </div>
-                    <div class="flex justify-between items-center">
-                        <span>Completed view</span>
-                        <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs">Alt+3</kbd>
+                    <div class="flex justify-between items-center gap-2">
+                        <span class="flex items-center gap-2 min-w-0">
+                            <CheckCircle2 :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
+                            Completed view
+                        </span>
+                        <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs shrink-0">Alt+3</kbd>
                     </div>
-                    <div class="flex justify-between items-center">
-                        <span>Trash view</span>
-                        <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs">Alt+4</kbd>
+                    <div class="flex justify-between items-center gap-2">
+                        <span class="flex items-center gap-2 min-w-0">
+                            <Trash2 :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
+                            Trash view
+                        </span>
+                        <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs shrink-0">Alt+4</kbd>
                     </div>
-                    <div class="flex justify-between items-center">
-                        <span>Focus mode</span>
-                        <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs">Alt+F</kbd>
+                    <div class="flex justify-between items-center gap-2">
+                        <span class="flex items-center gap-2 min-w-0">
+                            <Target :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
+                            Focus mode
+                        </span>
+                        <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs shrink-0">Alt+F</kbd>
                     </div>
-                    <div class="flex justify-between items-center">
-                        <span>Quick add task</span>
-                        <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs">Alt+N</kbd>
+                    <div class="flex justify-between items-center gap-2">
+                        <span class="flex items-center gap-2 min-w-0">
+                            <PlusCircle :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
+                            Quick add task
+                        </span>
+                        <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs shrink-0">Alt+N</kbd>
                     </div>
-                    <div class="flex justify-between items-center">
-                        <span>Help</span>
-                        <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs">Alt+H</kbd>
+                    <div class="flex justify-between items-center gap-2">
+                        <span class="flex items-center gap-2 min-w-0">
+                            <HelpCircle :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
+                            Help
+                        </span>
+                        <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs shrink-0">Alt+H</kbd>
                     </div>
                 </div>
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
-                <h3 class="font-PoppinsBold text-green mb-2">Quick Add</h3>
+                <h3 class="font-PoppinsBold text-green mb-2 flex items-center gap-2">
+                    <Zap :size="16" :stroke-width="2.25" class="shrink-0" aria-hidden="true" />
+                    Quick Add
+                </h3>
                 <p class="text-light/90 mb-2 text-xs">Type naturally — dates are parsed automatically. Press Enter or click Add.</p>
                 <div class="space-y-1 text-light/70 text-[11px] font-mono bg-dark/50 p-2 rounded">
                     <div>"Call Sam tomorrow 3pm"</div>
@@ -63,7 +94,10 @@
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
-                <h3 class="font-PoppinsBold text-green mb-2">Task features</h3>
+                <h3 class="font-PoppinsBold text-green mb-2 flex items-center gap-2">
+                    <ListChecks :size="16" :stroke-width="2.25" class="shrink-0" aria-hidden="true" />
+                    Task features
+                </h3>
                 <div class="space-y-2 text-xs">
                     <div>
                         <strong class="text-light">Priority</strong>
@@ -89,37 +123,54 @@
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
-                <h3 class="font-PoppinsBold text-green mb-2">Views</h3>
+                <h3 class="font-PoppinsBold text-green mb-2 flex items-center gap-2">
+                    <LayoutGrid :size="16" :stroke-width="2.25" class="shrink-0" aria-hidden="true" />
+                    Views
+                </h3>
                 <div class="space-y-1.5 text-xs">
                     <div class="flex items-start gap-2">
-                        <strong class="text-light min-w-[80px]">Today</strong>
+                        <CalendarDays :size="14" :stroke-width="2.25" class="shrink-0 text-light/45 mt-0.5" aria-hidden="true" />
+                        <strong class="text-light min-w-[72px]">Today</strong>
                         <span class="text-light/70">Overdue + due today</span>
                     </div>
                     <div class="flex items-start gap-2">
-                        <strong class="text-light min-w-[80px]">Upcoming</strong>
+                        <CalendarClock :size="14" :stroke-width="2.25" class="shrink-0 text-light/45 mt-0.5" aria-hidden="true" />
+                        <strong class="text-light min-w-[72px]">Upcoming</strong>
                         <span class="text-light/70">Future due dates, sorted</span>
                     </div>
                     <div class="flex items-start gap-2">
-                        <strong class="text-light min-w-[80px]">All</strong>
+                        <ListTodo :size="14" :stroke-width="2.25" class="shrink-0 text-light/45 mt-0.5" aria-hidden="true" />
+                        <strong class="text-light min-w-[72px]">All</strong>
                         <span class="text-light/70">All active tasks, custom order</span>
                     </div>
                     <div class="flex items-start gap-2">
-                        <strong class="text-light min-w-[80px]">Completed</strong>
+                        <CheckCircle2 :size="14" :stroke-width="2.25" class="shrink-0 text-light/45 mt-0.5" aria-hidden="true" />
+                        <strong class="text-light min-w-[72px]">Completed</strong>
                         <span class="text-light/70">Done tasks (can reopen)</span>
                     </div>
                     <div class="flex items-start gap-2">
-                        <strong class="text-light min-w-[80px]">Trash</strong>
+                        <Trash2 :size="14" :stroke-width="2.25" class="shrink-0 text-light/45 mt-0.5" aria-hidden="true" />
+                        <strong class="text-light min-w-[72px]">Trash</strong>
                         <span class="text-light/70">Deleted (can restore)</span>
                     </div>
                     <div class="flex items-start gap-2">
-                        <strong class="text-light min-w-[80px]">Focus</strong>
+                        <Target :size="14" :stroke-width="2.25" class="shrink-0 text-light/45 mt-0.5" aria-hidden="true" />
+                        <strong class="text-light min-w-[72px]">Focus</strong>
                         <span class="text-light/70">One task + Pomodoro</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <Flame :size="14" :stroke-width="2.25" class="shrink-0 text-light/45 mt-0.5" aria-hidden="true" />
+                        <strong class="text-light min-w-[72px]">Streak</strong>
+                        <span class="text-light/70">Activity heatmap + consecutive-day streak</span>
                     </div>
                 </div>
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
-                <h3 class="font-PoppinsBold text-green mb-2">Data &amp; storage</h3>
+                <h3 class="font-PoppinsBold text-green mb-2 flex items-center gap-2">
+                    <HardDrive :size="16" :stroke-width="2.25" class="shrink-0" aria-hidden="true" />
+                    Data &amp; storage
+                </h3>
                 <div class="space-y-2 text-light/90 text-xs">
                     <div>
                         <strong class="text-light">Browser-only storage</strong>
@@ -149,7 +200,10 @@
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
-                <h3 class="font-PoppinsBold text-green mb-2">Search &amp; filter</h3>
+                <h3 class="font-PoppinsBold text-green mb-2 flex items-center gap-2">
+                    <Search :size="16" :stroke-width="2.25" class="shrink-0" aria-hidden="true" />
+                    Search &amp; filter
+                </h3>
                 <div class="space-y-2 text-xs">
                     <div>
                         <strong class="text-light">Search</strong>
@@ -163,7 +217,10 @@
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
-                <h3 class="font-PoppinsBold text-green mb-2">Focus Mode</h3>
+                <h3 class="font-PoppinsBold text-green mb-2 flex items-center gap-2">
+                    <Target :size="16" :stroke-width="2.25" class="shrink-0" aria-hidden="true" />
+                    Focus Mode
+                </h3>
                 <p class="text-light/90 mb-2 text-xs">Work on one task at a time with Pomodoro timer.</p>
                 <div class="space-y-1.5 text-light/70 text-[11px]">
                     <div>• Shows earliest due task from active list</div>
@@ -175,7 +232,10 @@
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
-                <h3 class="font-PoppinsBold text-green mb-2">Productivity tracking</h3>
+                <h3 class="font-PoppinsBold text-green mb-2 flex items-center gap-2">
+                    <TrendingUp :size="16" :stroke-width="2.25" class="shrink-0" aria-hidden="true" />
+                    Productivity tracking
+                </h3>
                 <div class="space-y-2 text-xs">
                     <div>
                         <strong class="text-light">Streak</strong>
@@ -197,7 +257,25 @@
 
 <script setup>
 import { storeToRefs } from "pinia"
-import { X } from "lucide-vue-next"
+import {
+    X,
+    HelpCircle,
+    Keyboard,
+    Zap,
+    ListChecks,
+    LayoutGrid,
+    HardDrive,
+    Search,
+    Target,
+    TrendingUp,
+    CalendarDays,
+    CalendarClock,
+    CheckCircle2,
+    Trash2,
+    PlusCircle,
+    ListTodo,
+    Flame,
+} from "lucide-vue-next"
 import { useUiStore } from "../stores/ui.js"
 
 const ui = useUiStore()
