@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, watch } from "vue"
 import { storeToRefs } from "pinia"
-import { RouterView } from "vue-router"
+import { RouterView, RouterLink } from "vue-router"
 import { Search, Tag, Download, Upload, Sun, Moon, Flame, CalendarCheck } from "lucide-vue-next"
 import NavBar from "./components/NavBar.vue"
 import QuickAddBar from "./components/QuickAddBar.vue"
@@ -16,6 +16,8 @@ import { useAppStore } from "./stores/app.js"
 import { parseAppState } from "./storage/schema.js"
 import { migrateFromLegacyTasksKey } from "./storage/migrations.js"
 import { useKeyboardShortcuts } from "./composables/useKeyboardShortcuts.js"
+
+const logoSrc = `${import.meta.env.BASE_URL}favicon.svg`
 
 const ui = useUiStore()
 const app = useAppStore()
@@ -138,8 +140,21 @@ defineExpose({ showConfirm })
     >
         <header class="app-header fixed top-0 left-0 right-0 z-40 bg-dark/95 border-b border-light/10 backdrop-blur-sm">
             <div class="max-w-3xl mx-auto flex flex-wrap items-center justify-between gap-3 px-4 py-3">
-                <h1 class="text-xl font-PoppinsBold tracking-tight flex items-center gap-2">
-                    Stride
+                <h1 class="text-xl font-PoppinsBold tracking-tight m-0">
+                    <RouterLink
+                        to="/today"
+                        class="flex items-center gap-2 text-inherit no-underline rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-red/80 focus-visible:ring-offset-2 focus-visible:ring-offset-dark"
+                    >
+                        <img
+                            :src="logoSrc"
+                            alt=""
+                            width="28"
+                            height="28"
+                            class="shrink-0 size-7 rounded-lg"
+                            decoding="async"
+                        />
+                        Stride
+                    </RouterLink>
                 </h1>
                 <div class="flex flex-wrap items-center gap-3 text-xs">
                     <StreakHeatmapPopover>
