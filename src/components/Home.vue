@@ -3,17 +3,17 @@
     import Footer from './Footer.vue'
     import moment from 'moment'
     import Loading from './Loading.vue'
-    import Notification from './WelcomeBoard.vue'
     import Help from './Help.vue'
 
     import { mapState, mapGetters, mapActions } from 'vuex'
+
+    const INTRO_STORAGE_KEY = 'stride_intro_seen'
 
     export default {
         components: {
             Header,
             Footer,
             Loading,
-            Notification,
             Help,
         },
         data() {
@@ -55,7 +55,19 @@
             ])
         },
         methods: {
-            ...mapActions(['loadTasks', 'saveTasksLocal', 'addTask', 'updateTask', 'deleteTask', 'setLoading', 'setShowHelp']),
+            ...mapActions(['loadTasks', 'saveTasksLocal', 'addTask', 'updateTask', 'deleteTask', 'setLoading', 'setShowHelp', 'setNotification']),
+            showFirstRunIntroIfNeeded() {
+                try {
+                    if (localStorage.getItem(INTRO_STORAGE_KEY)) return
+                    localStorage.setItem(INTRO_STORAGE_KEY, '1')
+                    this.setNotification({
+                        message: 'Tasks are stored in this browser only. Clearing site data will remove them.',
+                        type: 'normal',
+                    })
+                } catch {
+                    /* private mode or storage blocked */
+                }
+            },
             updateDate(date){
                 const givenDate = moment(date);
                 const today = moment();
@@ -118,6 +130,7 @@
             this.$refs.taskInput.focus()
             this.timer = setInterval(this.updateCurrentDateTime, 1000)
             this.loadTasks()
+            this.$nextTick(() => this.showFirstRunIntroIfNeeded())
             window.addEventListener("keyup", this.onDocumentKeyup)
         },
         beforeUnmount() {
@@ -131,21 +144,25 @@
     <Header />
     <Footer />
     <Loading />
-    <Notification />
     <Help />
     <div class="flex flex-row items-start justify-start gap-4 w-[90%] md:w-[60%] lg:w-[40%] text-center">
         <div class="flex flex-col gap-4 w-full">
             <div class="w-full flex flex-col items-center justify-center">
                 <span class="text-xs md:text-lg font-PoppinsBold">{{ currentDateTime }}</span>
             </div>
-            <div class="w-full h-auto p-2 lg:p-10 flex flex-row gap-2 lg:gap-10 items-center justify-center bg-dark border-2 border-light rounded-3xl shadow-md font-PoppinsBold">
-                <p class="font-bold text-2xl md:text-3xl">
-                    Todo Done <br>
-                    <span class="font-Poppins font-thin text-lg md:text-xl text-red">keep it up</span>
-                </p>
-                <span class="bg-red w-20 h-20 md:w-32 md:h-32 p-2 flex items-center justify-center text-dark text-3xl md:text-4xl rounded-full">{{ tasksCompletedCount }}/{{ tasksTotalCount }}</span>
+            <div class="w-full h-auto p-4 lg:p-8 flex flex-row gap-4 lg:gap-8 items-center justify-between bg-dark border border-light/80 rounded-2xl shadow-md font-PoppinsBold">
+                <div class="text-left pl-1">
+                    <p class="font-bold text-xl md:text-2xl text-light">Progress</p>
+                    <p class="font-Poppins font-normal text-sm md:text-base text-light/70 mt-1">
+                        {{ tasksCompletedCount }} of {{ tasksTotalCount }} completed
+                    </p>
+                </div>
+                <span class="bg-red/90 w-16 h-16 md:w-28 md:h-28 shrink-0 flex items-center justify-center text-dark text-2xl md:text-3xl font-PoppinsBold rounded-full tabular-nums">{{ tasksCompletedCount }}/{{ tasksTotalCount }}</span>
             </div>
-            <span class="text-red text-center" v-if="showWarning">&#9888;&#65039; Write your task first. Then press enter or click Add button.</span>
+            <p class="text-red text-center text-sm flex items-center justify-center gap-2" v-if="showWarning" role="alert">
+                <svg class="w-4 h-4 shrink-0 text-red" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+                <span>Enter a task, then press Enter or choose Add.</span>
+            </p>
             <div class="relative w-full">
                 <input 
                     v-model="taskInput"
@@ -153,7 +170,7 @@
                     type="text" 
                     name="task-input" 
                     id="task-input"
-                    placeholder="Add Task Here"
+                    placeholder="Add a task…"
                     ref="taskInput"
                     @keypress.enter="handleAddTask"
                 />
@@ -175,9 +192,9 @@
                         <img v-if="showPending" class="w-5 h-5 lg:w-6 lg:h-6" src="/src/assets/icons/down-red.png" alt="">
                         <img v-else class="w-5 h-5 lg:w-6 lg:h-6" src="/src/assets/icons/up-red.png" alt="">
                         <span class="font-PoppinsBold text-md lg:text-xl">
-                            Todo
+                            Open
                         </span>
-                        <span class="text-opacity-5"> {{ tasksPendingCount }} item{{tasksPendingCount>1?'s':''}}</span>
+                        <span class="text-light/50"> {{ tasksPendingCount }} task{{ tasksPendingCount !== 1 ? 's' : '' }}</span>
                     </div>
                     <div v-if="showPending" class="w-full h-[2px] bg-gray mb-2"></div>
                     <div v-if="showPending" v-for="(item, index) in tasks" :key="index" class="flex flex-row pl-2">
@@ -185,6 +202,7 @@
                             <label 
                                 class="hidden md:block cursor-pointer"
                                 :for="'check'+index"
+                                aria-label="Mark complete"
                                 >
                                 <img class="w-7 h-7" src="/src/assets/icons/circle.png" alt="">
                                 <input 
@@ -217,6 +235,7 @@
                                 <label 
                                     class="block md:hidden cursor-pointer mr-auto"
                                     :for="'check'+index"
+                                    aria-label="Mark complete"
                                     >
                                     <img class="w-5 h-5" src="/src/assets/icons/circle.png" alt="">
                                     <input 
@@ -259,9 +278,9 @@
                         <img v-if="showCompleted" class="w-5 h-5 lg:w-6 lg:h-6" src="/src/assets/icons/down-green.png" alt="">
                         <img v-else class="w-5 h-5 lg:w-6 lg:h-6" src="/src/assets/icons/up-green.png" alt="">
                         <span class="font-PoppinsBold text-md lg:text-xl">
-                            Completed
+                            Done
                         </span>
-                        <span class="text-opacity-50"> {{ tasksCompletedCount }} item{{tasksCompletedCount>1?'s':''}}</span>
+                        <span class="text-light/50"> {{ tasksCompletedCount }} task{{ tasksCompletedCount !== 1 ? 's' : '' }}</span>
                     </div>
                     <div v-if="showCompleted" class="w-full h-[2px] bg-gray mb-2"></div>
                     <div v-if="showCompleted" v-for="(item, index) in tasks" :key="index" class="flex flex-row">
@@ -271,7 +290,8 @@
                             >
                             <label
                                 class="hidden md:block cursor-pointer"
-                                :for="'check'+index"  
+                                :for="'check'+index"
+                                aria-label="Mark not complete"
                                 >
                                 <img class="w-9 h-9" src="/src/assets/icons/tick.png" alt="">
                                 <input type="checkbox" v-model="item.status" :id="'check' + index" class="cursor-pointer w-full" @change="handleUpdateTask(index)"/>
@@ -293,7 +313,8 @@
                             <div class="flex flex-row gap-2 ml-auto md:w-auto w-full">
                                 <label
                                     class="md:hidden block cursor-pointer mr-auto"
-                                    :for="'check'+index"  
+                                    :for="'check'+index"
+                                    aria-label="Mark not complete"
                                     >
                                     <img class="w-6 h-6 md:w-9 md:h-9" src="/src/assets/icons/tick.png" alt="">
                                     <input type="checkbox" v-model="item.status" :id="'check' + index" class="cursor-pointer w-full" @change="handleUpdateTask(index)"/>
