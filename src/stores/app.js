@@ -86,6 +86,48 @@ export const useAppStore = defineStore("app", {
             if (denom === 0) return completedToday > 0 ? 100 : 0
             return Math.round((completedToday / denom) * 100)
         },
+
+        /** GitHub-style contribution grid: columns = weeks (oldest → newest), rows = Sun→Sat */
+        streakContributionColumns(state) {
+            const counts = {}
+            for (const t of state.tasks) {
+                if (!t.completedAt) continue
+                const k = dayjs(t.completedAt).format("YYYY-MM-DD")
+                counts[k] = (counts[k] || 0) + 1
+            }
+            const numWeeks = 13
+            const today = dayjs().startOf("day")
+            const lastWeekStart = today.startOf("week")
+            const firstWeekStart = lastWeekStart.subtract(numWeeks - 1, "week")
+            const columns = []
+            for (let w = 0; w < numWeeks; w++) {
+                const col = []
+                const weekStart = firstWeekStart.add(w, "week")
+                for (let dow = 0; dow < 7; dow++) {
+                    const day = weekStart.add(dow, "day")
+                    const key = day.format("YYYY-MM-DD")
+                    const isFuture = day.isAfter(today, "day")
+                    const c = isFuture ? 0 : counts[key] || 0
+                    let level = 0
+                    if (isFuture) {
+                        level = -1
+                    } else if (c === 0) {
+                        level = 0
+                    } else if (c === 1) {
+                        level = 1
+                    } else if (c <= 3) {
+                        level = 2
+                    } else if (c <= 6) {
+                        level = 3
+                    } else {
+                        level = 4
+                    }
+                    col.push({ key, level, count: c, isFuture })
+                }
+                columns.push(col)
+            }
+            return columns
+        },
     },
     actions: {
         _persist() {

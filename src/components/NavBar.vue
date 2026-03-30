@@ -19,7 +19,7 @@
 
 <script setup>
 import { useRoute } from "vue-router"
-import { CalendarDays, CalendarClock, ListTodo, CheckCircle2, Trash2, Target } from "lucide-vue-next"
+import { CalendarDays, CalendarClock, ListTodo, CheckCircle2, Trash2, Target, Flame } from "lucide-vue-next"
 
 const route = useRoute()
 
@@ -30,5 +30,6 @@ const links = [
     { to: "/completed", label: "Done", icon: CheckCircle2 },
     { to: "/trash", label: "Trash", icon: Trash2 },
     { to: "/focus", label: "Focus", icon: Target },
+    { to: "/streak", label: "Streak", icon: Flame },
 ]
 </script>

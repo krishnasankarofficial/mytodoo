@@ -5,6 +5,7 @@ import { RouterView } from "vue-router"
 import { Search, Tag, Download, Upload, Sun, Moon } from "lucide-vue-next"
 import NavBar from "./components/NavBar.vue"
 import QuickAddBar from "./components/QuickAddBar.vue"
+import StreakHeatmapPopover from "./components/StreakHeatmapPopover.vue"
 import Footer from "./components/Footer.vue"
 import Help from "./components/Help.vue"
 import ImportPreviewModal from "./components/ImportPreviewModal.vue"
@@ -141,9 +142,11 @@ defineExpose({ showConfirm })
                     Stride
                 </h1>
                 <div class="flex flex-wrap items-center gap-3 text-xs">
-                    <span class="text-light/60 flex items-center gap-1">
-                        Streak {{ app.preferences.streakDays }}d
-                    </span>
+                    <StreakHeatmapPopover>
+                        <span class="text-light/60 flex items-center gap-1 cursor-default border-b border-dotted border-light/25 hover:text-light/80">
+                            Streak {{ app.preferences.streakDays }}d
+                        </span>
+                    </StreakHeatmapPopover>
                     <span class="text-light/60 flex items-center gap-1">
                         Today {{ app.dailyProgressPercent }}%
                     </span>
