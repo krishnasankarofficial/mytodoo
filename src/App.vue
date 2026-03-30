@@ -6,7 +6,6 @@ import { Search, Tag, Download, Upload, Sun, Moon, Flame, CalendarCheck } from "
 import NavBar from "./components/NavBar.vue"
 import Tooltip from "./components/Tooltip.vue"
 import QuickAddBar from "./components/QuickAddBar.vue"
-import StreakHeatmapPopover from "./components/StreakHeatmapPopover.vue"
 import Footer from "./components/Footer.vue"
 import Help from "./components/Help.vue"
 import ImportPreviewModal from "./components/ImportPreviewModal.vue"
@@ -159,17 +158,18 @@ defineExpose({ showConfirm })
                 </h1>
                 <div class="flex flex-wrap items-center gap-3 text-xs">
                     <Tooltip
-                        text="Consecutive days with at least one completed task — hover for activity map"
+                        text="Consecutive days with at least one completed task — open Streak for the full activity heatmap"
                         position="bottom"
                         inline
                         wrap
                     >
-                        <StreakHeatmapPopover>
-                            <span class="text-light/60 flex items-center gap-1.5 cursor-default border-b border-dotted border-light/25 hover:text-light/80">
-                                <Flame :size="14" :stroke-width="2.25" class="shrink-0 text-green/90" aria-hidden="true" />
-                                Streak {{ app.preferences.streakDays }}d
-                            </span>
-                        </StreakHeatmapPopover>
+                        <RouterLink
+                            to="/streak"
+                            class="text-light/60 flex items-center gap-1.5 border-b border-dotted border-light/25 hover:text-light/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green/60 rounded-sm"
+                        >
+                            <Flame :size="14" :stroke-width="2.25" class="shrink-0 text-green/90" aria-hidden="true" />
+                            Streak {{ app.preferences.streakDays }}d
+                        </RouterLink>
                     </Tooltip>
                     <Tooltip
                         text="Daily progress — share of today’s due tasks completed"

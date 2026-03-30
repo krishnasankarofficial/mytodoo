@@ -4,6 +4,7 @@ import { APP_SCHEMA_VERSION, parseAppState } from "../storage/schema.js"
 import { loadAppState, saveAppStateRaw } from "../storage/clientStorage.js"
 import { computeNextDue } from "../utils/recurrence.js"
 import { dayjs } from "../utils/dates.js"
+import { computeStreakAnalytics } from "../utils/streakAnalytics.js"
 import { useUiStore } from "./ui.js"
 
 function newId() {
@@ -127,6 +128,11 @@ export const useAppStore = defineStore("app", {
                 columns.push(col)
             }
             return columns
+        },
+
+        /** Summary stats + series for streak page charts */
+        streakAnalytics(state) {
+            return computeStreakAnalytics(state.tasks)
         },
     },
     actions: {
