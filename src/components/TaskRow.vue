@@ -176,7 +176,12 @@
             </div>
             <div>
                 <label class="block text-xs text-light/50 mb-1">Due date & time</label>
-                <input v-model="draft.dueAt" type="datetime-local" class="w-full bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm" />
+                <input 
+                    v-model="draft.dueAt" 
+                    type="datetime-local" 
+                    class="w-full bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm"
+                    @change="onDueDateChange"
+                />
             </div>
             <label class="block text-xs text-light/50">Priority</label>
             <select v-model="draft.priority" class="w-full bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm">
@@ -265,8 +270,8 @@ const dueDateClass = computed(() => {
         // Due today - minimal red
         return 'border-red/30 bg-red/5'
     } else if (due.isSame(tomorrow, 'day')) {
-        // Due tomorrow - light orange/yellow
-        return 'border-orange-500/30 bg-orange-500/5'
+        // Due tomorrow - light yellow
+        return 'border-yellow-500/30 bg-yellow-500/5'
     }
     
     return ''
@@ -325,6 +330,16 @@ function addNewTag() {
     if (tag && !cur.includes(tag)) {
         selectedTags.value = [...selectedTags.value, tag]
         newTagInput.value = ""
+    }
+}
+
+function onDueDateChange(e) {
+    const value = e.target.value
+    if (!value) return
+    
+    // If only date is selected (length 10, format: YYYY-MM-DD), add default time
+    if (value.length === 10) {
+        draft.value.dueAt = value + 'T00:00'
     }
 }
 
