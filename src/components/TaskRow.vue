@@ -175,14 +175,23 @@
                     </button>
                 </div>
             </div>
-            <div>
-                <label class="block text-xs text-light/50 mb-1">Due date & time</label>
-                <input 
-                    v-model="draft.dueAt" 
-                    type="datetime-local" 
-                    class="w-full bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm"
-                    @change="onDueDateChange"
-                />
+            <div class="grid grid-cols-2 gap-2">
+                <div>
+                    <label class="block text-xs text-light/50 mb-1">Due date</label>
+                    <input 
+                        v-model="draft.dueDate" 
+                        type="date" 
+                        class="w-full bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm"
+                    />
+                </div>
+                <div>
+                    <label class="block text-xs text-light/50 mb-1">Time</label>
+                    <input 
+                        v-model="draft.dueTime" 
+                        type="time" 
+                        class="w-full bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm"
+                    />
+                </div>
             </div>
             <label class="block text-xs text-light/50">Priority</label>
             <select v-model="draft.priority" class="w-full bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm">
@@ -242,6 +251,8 @@ const draft = ref({
     title: "",
     description: "",
     dueAt: "",
+    dueDate: "",
+    dueTime: "00:00",
     recurrenceRule: "none",
     intervalDays: 2,
     priority: "none",
@@ -302,10 +313,13 @@ const dueDateTooltip = computed(() => {
 watch(
     () => props.task,
     (t) => {
+        const dueAtValue = t.dueAt ? dayjs(t.dueAt).format("YYYY-MM-DDTHH:mm") : ""
         draft.value = {
             title: t.title,
             description: t.description || "",
-            dueAt: t.dueAt ? dayjs(t.dueAt).format("YYYY-MM-DDTHH:mm") : "",
+            dueAt: dueAtValue,
+            dueDate: t.dueAt ? dayjs(t.dueAt).format("YYYY-MM-DD") : "",
+            dueTime: t.dueAt ? dayjs(t.dueAt).format("HH:mm") : "00:00",
             priority: t.priority || "none",
             recurrenceRule: t.recurrence?.rule || "none",
             intervalDays: t.recurrence?.intervalDays ?? 2,
@@ -355,16 +369,6 @@ function addNewTag() {
     }
 }
 
-function onDueDateChange(e) {
-    const value = e.target.value
-    if (!value) return
-    
-    // If only date is selected (length 10, format: YYYY-MM-DD), add default time
-    if (value.length === 10) {
-        draft.value.dueAt = value + 'T00:00'
-    }
-}
-
 function removeTag(tag) {
     selectedTags.value = selectedTags.value.filter(t => t !== tag)
 }
@@ -392,16 +396,13 @@ function saveEdit() {
         recurrence = { rule: "custom", intervalDays: Math.max(1, draft.value.intervalDays || 0) }
     
     let dueAt = null
-    if (draft.value.dueAt) {
+    if (draft.value.dueDate) {
         try {
-            let dateStr = draft.value.dueAt
-            // If only date is provided (YYYY-MM-DD), append 00:00 time
-            if (dateStr.length === 10 && !dateStr.includes('T')) {
-                dateStr += 'T00:00'
-            }
-            dueAt = new Date(dateStr).toISOString()
+            const time = draft.value.dueTime || "00:00"
+            const dateTimeStr = `${draft.value.dueDate}T${time}`
+            dueAt = new Date(dateTimeStr).toISOString()
         } catch (e) {
-            console.error("Invalid date:", draft.value.dueAt, e)
+            console.error("Invalid date:", draft.value.dueDate, draft.value.dueTime, e)
         }
     }
     
