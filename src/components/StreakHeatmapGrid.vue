@@ -6,19 +6,25 @@
             class="flex flex-col"
             :class="innerGap"
         >
-            <div
+            <Tooltip
                 v-for="cell in col"
                 :key="cell.key"
-                class="rounded-[2px] shrink-0"
-                :class="[cellSizeClass, cellClass(cell)]"
-                :title="titleFor(cell)"
-            />
+                :text="tooltipText(cell)"
+                position="top"
+                inline
+            >
+                <div
+                    class="rounded-[2px] shrink-0"
+                    :class="[cellSizeClass, cellClass(cell)]"
+                />
+            </Tooltip>
         </div>
     </div>
 </template>
 
 <script setup>
 import { computed } from "vue"
+import Tooltip from "./Tooltip.vue"
 
 const props = defineProps({
     /** Same shape as store getter streakContributionColumns */
@@ -69,7 +75,7 @@ function cellClass(cell) {
     }
 }
 
-function titleFor(cell) {
+function tooltipText(cell) {
     if (cell.isFuture) return ""
     const label = cell.key
     if (cell.count === 0) return `${label}: no completions`

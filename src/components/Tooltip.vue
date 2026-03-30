@@ -1,5 +1,10 @@
 <template>
-    <div class="relative w-full" @mouseenter="show = true" @mouseleave="show = false">
+    <div
+        class="relative"
+        :class="inline ? 'inline-flex' : 'w-full'"
+        @mouseenter="show = true"
+        @mouseleave="show = false"
+    >
         <slot></slot>
         <Transition
             enter-active-class="transition-opacity duration-200"
@@ -27,6 +32,8 @@ import { ref, computed } from "vue"
 const props = defineProps({
     text: { type: String, default: "" },
     position: { type: String, default: "top" }, // top, bottom, left, right
+    /** Shrink-wrap trigger (e.g. heatmap cells) instead of full width */
+    inline: { type: Boolean, default: false },
 })
 
 const show = ref(false)
