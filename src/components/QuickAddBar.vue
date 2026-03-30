@@ -24,8 +24,9 @@
             />
             <button
                 type="submit"
-                class="absolute right-2 top-1/2 z-20 -translate-y-1/2 bg-red text-dark font-PoppinsBold text-sm px-4 py-2 rounded-xl hover:opacity-90"
+                class="absolute right-2 top-1/2 z-20 -translate-y-1/2 bg-red text-dark font-PoppinsBold text-sm px-4 py-2 rounded-xl hover:opacity-90 flex items-center gap-1.5"
             >
+                <Plus :size="16" :stroke-width="2.5" />
                 Add
             </button>
         </div>
@@ -35,6 +36,7 @@
 <script setup>
 import { ref, onMounted } from "vue"
 import { useRouter } from "vue-router"
+import { Plus } from "lucide-vue-next"
 import { useAppStore } from "../stores/app.js"
 import { useUiStore } from "../stores/ui.js"
 import { parseQuickAdd } from "../composables/useQuickAdd.js"

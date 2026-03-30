@@ -15,25 +15,27 @@
             <button
                 v-if="typeof Notification !== 'undefined'"
                 type="button"
-                class="text-[10px] px-2 py-1 rounded border border-light/20 hover:bg-gray hidden sm:inline"
+                class="text-[10px] px-2 py-1 rounded border border-light/20 hover:bg-gray hidden sm:inline flex items-center gap-1"
                 title="Browser notifications for focus timer"
                 @click="requestNotif"
             >
+                <Bell :size="12" />
                 Notify
             </button>
             <button
                 type="button"
-                class="flex cursor-pointer items-center justify-center rounded-full bg-light bg-opacity-10 font-PoppinsBold text-red transition-opacity hover:bg-opacity-20 w-8 h-8 text-xl lg:h-10 lg:w-10 lg:text-2xl"
+                class="flex cursor-pointer items-center justify-center rounded-full bg-light bg-opacity-10 text-red transition-opacity hover:bg-opacity-20 w-8 h-8 lg:h-10 lg:w-10"
                 title="Help (Alt+H)"
                 @click="ui.setShowHelp(true)"
             >
-                ?
+                <HelpCircle :size="20" :stroke-width="2.5" />
             </button>
         </div>
     </div>
 </template>
 
 <script setup>
+import { Bell, HelpCircle } from "lucide-vue-next"
 import { useUiStore } from "../stores/ui.js"
 
 const ui = useUiStore()

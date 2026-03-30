@@ -3,7 +3,7 @@
         <h2 class="text-xl font-PoppinsBold mb-3 text-left">Upcoming</h2>
         <p class="text-sm text-light/50 mb-4 text-left">Future due dates · {{ filtered.length }} shown</p>
         <TaskList v-if="filtered.length" :tasks="filtered" variant="active" />
-        <EmptyState v-else title="No upcoming tasks" hint="Set a due date when editing a task." />
+        <EmptyState v-else title="No upcoming tasks" hint="Set a due date when editing a task." icon="📅" />
     </section>
 </template>
 

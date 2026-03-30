@@ -15,6 +15,7 @@
     "@vueuse/core": "^14.2.1",
     "chrono-node": "^2.9.0",
     "dayjs": "^1.11.20",
+    "lucide-vue-next": "^1.0.0",
     "pinia": "^3.0.4",
     "sortablejs": "^1.15.7",
     "vue": "^3.4.21",

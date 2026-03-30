@@ -36,8 +36,14 @@
                         {{ task.description }}
                     </p>
                     <div class="flex flex-wrap gap-2 mt-2 text-xs text-light/50">
-                        <span v-if="task.dueAt">Due {{ formatDue(task.dueAt) }}</span>
-                        <span v-if="task.recurrence?.rule !== 'none'">Repeats {{ task.recurrence.rule }}</span>
+                        <span v-if="task.dueAt" class="flex items-center gap-1">
+                            <Clock :size="12" />
+                            Due {{ formatDue(task.dueAt) }}
+                        </span>
+                        <span v-if="task.recurrence?.rule !== 'none'" class="flex items-center gap-1">
+                            <Repeat :size="12" />
+                            Repeats {{ task.recurrence.rule }}
+                        </span>
                     </div>
                     <div v-if="(task.tags || []).length" class="flex flex-wrap gap-1 mt-2">
                         <span
@@ -68,41 +74,47 @@
                 <button
                     v-if="variant === 'active'"
                     type="button"
-                    class="text-xs px-2 py-1 rounded border border-light/20 hover:bg-gray"
+                    class="text-xs px-2 py-1 rounded border border-light/20 hover:bg-gray flex items-center gap-1"
                     @click="editing = !editing"
                 >
+                    <Edit3 v-if="!editing" :size="12" />
+                    <XCircle v-else :size="12" />
                     {{ editing ? "Close" : "Edit" }}
                 </button>
                 <button
                     v-if="variant === 'active'"
                     type="button"
-                    class="text-xs px-2 py-1 rounded border border-light/20 hover:bg-gray"
+                    class="text-xs px-2 py-1 rounded border border-light/20 hover:bg-gray flex items-center gap-1"
                     @click="app.softDelete(task.id)"
                 >
+                    <Trash2 :size="12" />
                     Trash
                 </button>
                 <button
                     v-if="variant === 'completed'"
                     type="button"
-                    class="text-xs px-2 py-1 rounded border border-light/20 hover:bg-gray"
+                    class="text-xs px-2 py-1 rounded border border-light/20 hover:bg-gray flex items-center gap-1"
                     @click="app.uncompleteTask(task.id)"
                 >
+                    <RotateCcw :size="12" />
                     Reopen
                 </button>
                 <button
                     v-if="variant === 'trash'"
                     type="button"
-                    class="text-xs px-2 py-1 rounded border border-green/40 text-green hover:bg-gray"
+                    class="text-xs px-2 py-1 rounded border border-green/40 text-green hover:bg-gray flex items-center gap-1"
                     @click="app.restoreTask(task.id)"
                 >
+                    <RotateCcw :size="12" />
                     Restore
                 </button>
                 <button
                     v-if="variant === 'trash'"
                     type="button"
-                    class="text-xs px-2 py-1 rounded border border-red/40 text-red hover:bg-gray"
+                    class="text-xs px-2 py-1 rounded border border-red/40 text-red hover:bg-gray flex items-center gap-1"
                     @click="confirmDelete"
                 >
+                    <XCircle :size="12" />
                     Delete forever
                 </button>
             </div>
@@ -141,9 +153,10 @@
             />
             <button
                 type="button"
-                class="bg-green text-dark font-PoppinsBold px-4 py-2 rounded-lg text-sm"
+                class="bg-green text-dark font-PoppinsBold px-4 py-2 rounded-lg text-sm flex items-center gap-1.5"
                 @click="saveEdit"
             >
+                <Save :size="14" />
                 Save
             </button>
         </div>
@@ -153,6 +166,7 @@
 <script setup>
 import { ref, watch } from "vue"
 import dayjs from "dayjs"
+import { Edit3, Trash2, RotateCcw, XCircle, Save, Clock, Repeat, Tag } from "lucide-vue-next"
 import { useAppStore } from "../stores/app.js"
 import { useConfirm } from "../composables/useConfirm.js"
 

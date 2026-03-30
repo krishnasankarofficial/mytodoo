@@ -8,12 +8,14 @@
             <div class="flex flex-wrap gap-2 justify-center mb-6">
                 <button
                     type="button"
-                    class="bg-green text-dark font-PoppinsBold px-6 py-2 rounded-xl"
+                    class="bg-green text-dark font-PoppinsBold px-6 py-2 rounded-xl flex items-center gap-2"
                     @click="done"
                 >
+                    <CheckCircle2 :size="16" />
                     Mark done
                 </button>
-                <button type="button" class="border border-light/30 px-4 py-2 rounded-xl hover:bg-gray" @click="skip">
+                <button type="button" class="border border-light/30 px-4 py-2 rounded-xl hover:bg-gray flex items-center gap-2" @click="skip">
+                    <SkipForward :size="16" />
                     Skip
                 </button>
             </div>
@@ -23,30 +25,34 @@
                 <div class="flex flex-wrap gap-2 justify-center">
                     <button
                         type="button"
-                        class="text-sm px-3 py-1 rounded-lg border border-light/25"
+                        class="text-sm px-3 py-1 rounded-lg border border-light/25 flex items-center gap-1.5"
                         @click="pom.startWork"
                     >
+                        <Play :size="14" />
                         Start {{ app.preferences.pomodoroWorkMin }}m
                     </button>
                     <button
                         type="button"
-                        class="text-sm px-3 py-1 rounded-lg border border-light/25"
+                        class="text-sm px-3 py-1 rounded-lg border border-light/25 flex items-center gap-1.5"
                         @click="pom.startBreak"
                     >
+                        <Coffee :size="14" />
                         Break {{ app.preferences.pomodoroBreakMin }}m
                     </button>
-                    <button type="button" class="text-sm px-3 py-1 rounded-lg border border-light/25" @click="pom.stop">
+                    <button type="button" class="text-sm px-3 py-1 rounded-lg border border-light/25 flex items-center gap-1.5" @click="pom.stop">
+                        <Square :size="14" />
                         Stop
                     </button>
                 </div>
             </div>
         </div>
-        <EmptyState v-else title="Nothing to focus" hint="Add an open task with a due date or check All." />
+        <EmptyState v-else title="Nothing to focus" hint="Add an open task with a due date or check All." icon="🎯" />
     </section>
 </template>
 
 <script setup>
 import { computed, ref, watch } from "vue"
+import { CheckCircle2, SkipForward, Play, Coffee, Square } from "lucide-vue-next"
 import { useAppStore } from "../stores/app.js"
 import EmptyState from "../components/EmptyState.vue"
 import { usePomodoro } from "../composables/usePomodoro.js"

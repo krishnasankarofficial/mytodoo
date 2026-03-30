@@ -2,6 +2,7 @@
 import { ref, computed, onMounted, watch } from "vue"
 import { storeToRefs } from "pinia"
 import { RouterView } from "vue-router"
+import { Search, Tag, Download, Upload, Sun, Moon } from "lucide-vue-next"
 import NavBar from "./components/NavBar.vue"
 import QuickAddBar from "./components/QuickAddBar.vue"
 import Footer from "./components/Footer.vue"
@@ -136,15 +137,24 @@ defineExpose({ showConfirm })
     >
         <header class="app-header fixed top-0 left-0 right-0 z-40 bg-dark/95 border-b border-light/10 backdrop-blur-sm">
             <div class="max-w-3xl mx-auto flex flex-wrap items-center justify-between gap-3 px-4 py-3">
-                <h1 class="text-xl font-PoppinsBold tracking-tight">Stride</h1>
+                <h1 class="text-xl font-PoppinsBold tracking-tight flex items-center gap-2">
+                    <span class="text-red">⚡</span>
+                    Stride
+                </h1>
                 <div class="flex flex-wrap items-center gap-3 text-xs">
-                    <span class="text-light/60">Streak {{ app.preferences.streakDays }}d</span>
-                    <span class="text-light/60">Today {{ app.dailyProgressPercent }}%</span>
+                    <span class="text-light/60 flex items-center gap-1">
+                        🔥 Streak {{ app.preferences.streakDays }}d
+                    </span>
+                    <span class="text-light/60 flex items-center gap-1">
+                        📊 Today {{ app.dailyProgressPercent }}%
+                    </span>
                     <button
                         type="button"
-                        class="px-2 py-1 rounded border border-light/20 hover:bg-gray"
+                        class="px-2 py-1 rounded border border-light/20 hover:bg-gray flex items-center gap-1.5"
                         @click="toggleTheme"
                     >
+                        <Sun v-if="app.preferences.theme === 'dark'" :size="14" />
+                        <Moon v-else :size="14" />
                         {{ app.preferences.theme === "dark" ? "Light" : "Dark" }}
                     </button>
                 </div>
@@ -155,32 +165,40 @@ defineExpose({ showConfirm })
             <NavBar />
             <QuickAddBar />
             <div class="flex flex-col sm:flex-row gap-2 w-full">
-                <input
-                    v-model="searchInput"
-                    type="search"
-                    placeholder="Search…"
-                    class="flex-1 bg-gray/80 text-light text-sm px-4 py-2.5 rounded-xl border border-light/15 outline-none"
-                />
-                <input
-                    v-model="tagInput"
-                    type="text"
-                    placeholder="Filter tag"
-                    class="flex-1 bg-gray/80 text-light text-sm px-4 py-2.5 rounded-xl border border-light/15 outline-none"
-                />
+                <div class="relative flex-1">
+                    <Search :size="16" class="absolute left-3 top-1/2 -translate-y-1/2 text-light/40" />
+                    <input
+                        v-model="searchInput"
+                        type="search"
+                        placeholder="Search…"
+                        class="w-full bg-gray/80 text-light text-sm pl-10 pr-4 py-2.5 rounded-xl border border-light/15 outline-none"
+                    />
+                </div>
+                <div class="relative flex-1">
+                    <Tag :size="16" class="absolute left-3 top-1/2 -translate-y-1/2 text-light/40" />
+                    <input
+                        v-model="tagInput"
+                        type="text"
+                        placeholder="Filter tag"
+                        class="w-full bg-gray/80 text-light text-sm pl-10 pr-4 py-2.5 rounded-xl border border-light/15 outline-none"
+                    />
+                </div>
             </div>
             <div class="flex flex-wrap gap-2">
                 <button
                     type="button"
-                    class="text-xs font-PoppinsBold px-3 py-1.5 rounded-lg border border-light/25 hover:bg-gray"
+                    class="text-xs font-PoppinsBold px-3 py-1.5 rounded-lg border border-light/25 hover:bg-gray flex items-center gap-1.5"
                     @click="exportJson"
                 >
+                    <Download :size="14" />
                     Export JSON
                 </button>
                 <button
                     type="button"
-                    class="text-xs font-PoppinsBold px-3 py-1.5 rounded-lg border border-light/25 hover:bg-gray"
+                    class="text-xs font-PoppinsBold px-3 py-1.5 rounded-lg border border-light/25 hover:bg-gray flex items-center gap-1.5"
                     @click="triggerImport"
                 >
+                    <Upload :size="14" />
                     Import JSON
                 </button>
                 <label class="flex items-center gap-2 text-xs text-light/70 cursor-pointer">
