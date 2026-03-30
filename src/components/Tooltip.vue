@@ -16,8 +16,8 @@
         >
             <div
                 v-if="show && text"
-                class="absolute z-50 px-2 py-1 text-xs text-light bg-gray border border-light/20 rounded-lg pointer-events-none"
-                :class="[positionClass, wrap ? 'max-w-[min(18rem,calc(100vw-2rem))] whitespace-normal text-left leading-snug' : 'whitespace-nowrap']"
+                class="absolute z-50 text-light bg-gray border border-light/25 rounded-xl pointer-events-none shadow-lg"
+                :class="bubbleClass"
             >
                 {{ text }}
                 <div class="absolute w-2 h-2 bg-gray border-light/20 transform rotate-45" :class="arrowClass"></div>
@@ -52,6 +52,14 @@ const positionClass = computed(() => {
         default:
             return "bottom-full left-1/2 -translate-x-1/2 mb-2"
     }
+})
+
+/** Wrapped tips need min-width so they don't shrink to a narrow trigger (inline buttons). */
+const bubbleClass = computed(() => {
+    const base = props.wrap
+        ? "min-w-[13rem] max-w-[min(20rem,calc(100vw-1.5rem))] whitespace-normal text-left leading-relaxed px-3.5 py-2.5 text-[13px]"
+        : "max-w-[min(24rem,calc(100vw-1rem))] whitespace-nowrap px-2.5 py-1.5 text-xs"
+    return [positionClass.value, base]
 })
 
 const arrowClass = computed(() => {
