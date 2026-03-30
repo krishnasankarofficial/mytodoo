@@ -18,7 +18,7 @@
         </div>
         <div class="flex flex-col gap-3 w-full overflow-y-auto p-4 text-sm text-left">
             <section class="p-3 bg-gray rounded-xl">
-                <h3 class="font-PoppinsBold text-green mb-2">⌨️ Keyboard Shortcuts</h3>
+                <h3 class="font-PoppinsBold text-green mb-2">Keyboard shortcuts</h3>
                 <div class="space-y-1.5 text-light/90">
                     <div class="flex justify-between items-center">
                         <span>Today view</span>
@@ -63,11 +63,11 @@
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
-                <h3 class="font-PoppinsBold text-green mb-2">📋 Task Features</h3>
+                <h3 class="font-PoppinsBold text-green mb-2">Task features</h3>
                 <div class="space-y-2 text-xs">
                     <div>
                         <strong class="text-light">Priority</strong>
-                        <p class="text-light/70 mt-0.5">🔴 High · 🟡 Medium · 🔵 Low · ⚪ None</p>
+                        <p class="text-light/70 mt-0.5">High · Medium · Low · None (color-coded in the app)</p>
                     </div>
                     <div>
                         <strong class="text-light">Tags</strong>
@@ -119,7 +119,7 @@
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
-                <h3 class="font-PoppinsBold text-green mb-2">💾 Data & Storage</h3>
+                <h3 class="font-PoppinsBold text-green mb-2">Data &amp; storage</h3>
                 <div class="space-y-2 text-light/90 text-xs">
                     <div>
                         <strong class="text-light">Browser-only storage</strong>
@@ -142,14 +142,14 @@
                         <p class="text-light/70 mt-0.5">Restore from backup. Preview before replacing all data.</p>
                     </div>
                     <div>
-                        <strong class="text-light">Auto-backup (optional)</strong>
+                        <strong class="text-light">Scheduled backup</strong>
                         <p class="text-light/70 mt-0.5">Enable checkbox to auto-download JSON backup every 60 minutes. Files saved to your Downloads folder as <code class="text-red text-[10px]">stride-auto-YYYY-MM-DD.json</code></p>
                     </div>
                 </div>
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
-                <h3 class="font-PoppinsBold text-green mb-2">🔍 Search & Filter</h3>
+                <h3 class="font-PoppinsBold text-green mb-2">Search &amp; filter</h3>
                 <div class="space-y-2 text-xs">
                     <div>
                         <strong class="text-light">Search</strong>
@@ -163,8 +163,8 @@
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
-                <h3 class="font-PoppinsBold text-green mb-2">⏱️ Focus Mode</h3>
-                <p class="text-light/90 mb-2 text-xs">Work on one task at a time with optional Pomodoro timer.</p>
+                <h3 class="font-PoppinsBold text-green mb-2">Focus Mode</h3>
+                <p class="text-light/90 mb-2 text-xs">Work on one task at a time with Pomodoro timer.</p>
                 <div class="space-y-1.5 text-light/70 text-[11px]">
                     <div>• Shows earliest due task from active list</div>
                     <div>• <strong class="text-light">Start</strong> — work session (default 25 min)</div>
@@ -175,18 +175,18 @@
             </section>
 
             <section class="p-3 bg-gray rounded-xl">
-                <h3 class="font-PoppinsBold text-green mb-2">📊 Productivity Tracking</h3>
+                <h3 class="font-PoppinsBold text-green mb-2">Productivity tracking</h3>
                 <div class="space-y-2 text-xs">
                     <div>
                         <strong class="text-light">Streak</strong>
                         <p class="text-light/70 mt-0.5">Consecutive days with at least one completed task. Shown in header.</p>
                     </div>
                     <div>
-                        <strong class="text-light">📊 Daily Progress</strong>
+                        <strong class="text-light">Daily progress</strong>
                         <p class="text-light/70 mt-0.5">Percentage of today's due tasks completed. Updates in real-time.</p>
                     </div>
                     <div>
-                        <strong class="text-light">🔁 Recurring Tasks</strong>
+                        <strong class="text-light">Recurring tasks</strong>
                         <p class="text-light/70 mt-0.5">When completed, next instance auto-created based on recurrence rule.</p>
                     </div>
                 </div>

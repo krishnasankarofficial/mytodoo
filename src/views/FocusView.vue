@@ -1,7 +1,7 @@
 <template>
     <section class="max-w-lg mx-auto text-center">
         <h2 class="text-2xl font-PoppinsBold mb-2">Focus</h2>
-        <p class="text-sm text-light/50 mb-6">One task at a time · optional Pomodoro</p>
+        <p class="text-sm text-light/50 mb-6">One task at a time · Pomodoro timer</p>
         <div v-if="current" class="rounded-2xl border border-light/20 bg-gray/50 p-6 text-left">
             <h3 class="font-PoppinsBold text-xl mb-2">{{ current.title }}</h3>
             <p v-if="current.description" class="text-light/70 text-sm mb-4">{{ current.description }}</p>

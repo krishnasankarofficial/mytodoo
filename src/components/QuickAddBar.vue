@@ -6,10 +6,10 @@
             v-model="priority"
             class="shrink-0 bg-gray text-light font-Poppins text-sm border border-light/20 rounded-2xl px-4 py-4 outline-none min-w-[120px]"
         >
-            <option value="high">🔴 High</option>
-            <option value="medium">🟡 Medium</option>
-            <option value="low">🔵 Low</option>
-            <option value="none">⚪ None</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+            <option value="none">None</option>
         </select>
         <div class="relative flex-1 min-w-0">
             <input
