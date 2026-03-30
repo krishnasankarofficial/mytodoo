@@ -1,11 +1,12 @@
 <template>
-    <div
-        class="group rounded-xl border border-light/10 bg-gray/40 p-3 md:p-4 text-left transition hover:border-light/25"
-        :class="[
-            { 'opacity-70': task.status === 'completed' },
-            dueDateClass
-        ]"
-    >
+    <Tooltip :text="dueDateTooltip" position="top">
+        <div
+            class="group rounded-xl border border-light/10 bg-gray/40 p-3 md:p-4 text-left transition hover:border-light/25"
+            :class="[
+                { 'opacity-70': task.status === 'completed' },
+                dueDateClass
+            ]"
+        >
         <div class="flex flex-wrap gap-2 items-start justify-between">
             <div class="flex gap-2 min-w-0 flex-1">
                 <span
@@ -214,7 +215,8 @@
                 Save
             </button>
         </div>
-    </div>
+        </div>
+    </Tooltip>
 </template>
 
 <script setup>
@@ -223,6 +225,7 @@ import dayjs from "dayjs"
 import { Edit3, Trash2, RotateCcw, XCircle, Save, Clock, Repeat } from "lucide-vue-next"
 import { useAppStore } from "../stores/app.js"
 import { useConfirm } from "../composables/useConfirm.js"
+import Tooltip from "./Tooltip.vue"
 
 const props = defineProps({
     task: { type: Object, required: true },
@@ -272,6 +275,25 @@ const dueDateClass = computed(() => {
     } else if (due.isSame(tomorrow, 'day')) {
         // Due tomorrow - light yellow
         return 'border-yellow-500/30 bg-yellow-500/5'
+    }
+    
+    return ''
+})
+
+const dueDateTooltip = computed(() => {
+    if (!props.task.dueAt || props.task.status !== 'active') return ''
+    
+    const now = dayjs()
+    const due = dayjs(props.task.dueAt)
+    const today = now.startOf('day')
+    const tomorrow = today.add(1, 'day')
+    
+    if (due.isBefore(today)) {
+        return 'Overdue'
+    } else if (due.isSame(today, 'day')) {
+        return 'Due today'
+    } else if (due.isSame(tomorrow, 'day')) {
+        return 'Due tomorrow'
     }
     
     return ''
