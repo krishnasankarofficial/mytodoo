@@ -61,14 +61,15 @@
         <div class="rounded-xl border border-light/15 bg-gray/40 p-5">
             <h3 class="text-sm font-PoppinsBold text-light/90 mb-1">Last 30 days</h3>
             <p class="text-xs text-light/45 mb-4">Daily completion count · today on the right</p>
-            <div class="flex items-end gap-px sm:gap-0.5 h-28 w-full overflow-x-auto pb-1">
+            <div
+                class="grid h-28 w-full min-w-0 pb-1 gap-px sm:gap-0.5 items-end [grid-template-columns:repeat(30,minmax(0,1fr))]"
+            >
                 <Tooltip
                     v-for="day in analytics.last30Days"
                     :key="day.key"
                     :text="`${day.key}: ${day.count} completion${day.count === 1 ? '' : 's'}`"
                     position="top"
-                    inline
-                    class="flex-1 min-w-[6px] sm:min-w-[8px] flex flex-col justify-end h-full"
+                    class="min-w-0 h-full flex flex-col justify-end"
                 >
                     <div
                         class="w-full rounded-t-[1px] bg-green/60 hover:bg-green/90 transition min-h-[1px]"
