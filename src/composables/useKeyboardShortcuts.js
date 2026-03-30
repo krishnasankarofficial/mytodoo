@@ -36,7 +36,15 @@ export function useKeyboardShortcuts({ onQuickAdd } = {}) {
             e.preventDefault()
             router.push("/trash")
         }
-        if (e.altKey && e.key === "f") {
+        if (e.altKey && e.key === "5") {
+            e.preventDefault()
+            router.push("/all")
+        }
+        if (e.altKey && e.key === "6") {
+            e.preventDefault()
+            router.push("/streak")
+        }
+        if (e.altKey && e.key.toLowerCase() === "f") {
             e.preventDefault()
             router.push("/focus")
         }

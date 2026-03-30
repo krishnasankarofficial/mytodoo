@@ -57,6 +57,20 @@
                     </div>
                     <div class="flex justify-between items-center gap-2">
                         <span class="flex items-center gap-2 min-w-0">
+                            <ListTodo :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
+                            All tasks view
+                        </span>
+                        <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs shrink-0">Alt+5</kbd>
+                    </div>
+                    <div class="flex justify-between items-center gap-2">
+                        <span class="flex items-center gap-2 min-w-0">
+                            <Flame :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
+                            Streak view
+                        </span>
+                        <kbd class="px-2 py-0.5 rounded bg-dark border border-light/30 font-mono text-xs shrink-0">Alt+6</kbd>
+                    </div>
+                    <div class="flex justify-between items-center gap-2">
+                        <span class="flex items-center gap-2 min-w-0">
                             <Target :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
                             Focus mode
                         </span>
