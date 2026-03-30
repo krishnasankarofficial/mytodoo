@@ -175,13 +175,16 @@ defineExpose({ showConfirm })
                     />
                 </div>
                 <div class="relative flex-1">
-                    <Tag :size="16" class="absolute left-3 top-1/2 -translate-y-1/2 text-light/40" />
-                    <input
+                    <Tag :size="16" class="absolute left-3 top-1/2 -translate-y-1/2 text-light/40 pointer-events-none z-10" />
+                    <select
                         v-model="tagInput"
-                        type="text"
-                        placeholder="Filter tag"
-                        class="w-full bg-gray/80 text-light text-sm pl-10 pr-4 py-2.5 rounded-xl border border-light/15 outline-none"
-                    />
+                        class="w-full bg-gray/80 text-light text-sm pl-10 pr-4 py-2.5 rounded-xl border border-light/15 outline-none appearance-none cursor-pointer"
+                    >
+                        <option value="">All tags</option>
+                        <option v-for="tag in app.allTags" :key="tag" :value="tag">
+                            {{ tag }}
+                        </option>
+                    </select>
                 </div>
             </div>
             <div class="flex flex-wrap gap-2">

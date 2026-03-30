@@ -120,14 +120,54 @@
             </div>
         </div>
         <div v-if="editing && variant === 'active'" class="mt-4 space-y-2 border-t border-light/10 pt-3">
-            <input v-model="draft.title" class="w-full bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm" />
+            <input v-model="draft.title" class="w-full bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm" placeholder="Task title" />
             <textarea
                 v-model="draft.description"
                 rows="2"
                 class="w-full bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm"
                 placeholder="Description"
             />
-            <input v-model="draft.tags" class="w-full bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm" placeholder="Tags (comma separated)" />
+            <div>
+                <label class="block text-xs text-light/50 mb-1">Tags</label>
+                <div class="flex flex-wrap gap-1 mb-2">
+                    <button
+                        v-for="tag in selectedTags"
+                        :key="tag"
+                        type="button"
+                        class="text-xs px-2 py-1 rounded-full bg-red/20 text-light border border-red/40 hover:bg-red/30 flex items-center gap-1"
+                        @click="removeTag(tag)"
+                    >
+                        {{ tag }}
+                        <XCircle :size="10" />
+                    </button>
+                </div>
+                <div class="flex gap-2">
+                    <select
+                        ref="existingTagSelect"
+                        class="flex-1 bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm"
+                        @change="onExistingTagSelect"
+                    >
+                        <option value="">Select existing tag…</option>
+                        <option v-for="tag in availableTags" :key="tag" :value="tag">
+                            {{ tag }}
+                        </option>
+                    </select>
+                    <input
+                        v-model="newTagInput"
+                        type="text"
+                        placeholder="New tag"
+                        class="flex-1 bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm"
+                        @keydown.enter.prevent="addNewTag"
+                    />
+                    <button
+                        type="button"
+                        class="px-3 py-2 rounded-lg border border-light/20 hover:bg-gray text-xs"
+                        @click="addNewTag"
+                    >
+                        +
+                    </button>
+                </div>
+            </div>
             <input v-model="draft.dueAt" type="datetime-local" class="w-full bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm" />
             <label class="block text-xs text-light/50">Priority</label>
             <select v-model="draft.priority" class="w-full bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm">
@@ -164,9 +204,9 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue"
+import { ref, watch, computed, nextTick } from "vue"
 import dayjs from "dayjs"
-import { Edit3, Trash2, RotateCcw, XCircle, Save, Clock, Repeat, Tag } from "lucide-vue-next"
+import { Edit3, Trash2, RotateCcw, XCircle, Save, Clock, Repeat } from "lucide-vue-next"
 import { useAppStore } from "../stores/app.js"
 import { useConfirm } from "../composables/useConfirm.js"
 
@@ -178,13 +218,16 @@ const props = defineProps({
 const app = useAppStore()
 const { confirm } = useConfirm()
 const editing = ref(false)
+const selectedTags = ref([])
+const existingTagSelect = ref(null)
+const newTagInput = ref("")
 const draft = ref({
     title: "",
     description: "",
-    tags: "",
     dueAt: "",
     recurrenceRule: "none",
     intervalDays: 2,
+    priority: "none",
 })
 
 watch(
@@ -193,15 +236,59 @@ watch(
         draft.value = {
             title: t.title,
             description: t.description || "",
-            tags: (t.tags || []).join(", "),
             dueAt: t.dueAt ? dayjs(t.dueAt).format("YYYY-MM-DDTHH:mm") : "",
             priority: t.priority || "none",
             recurrenceRule: t.recurrence?.rule || "none",
             intervalDays: t.recurrence?.intervalDays ?? 2,
         }
+        selectedTags.value = [...(t.tags || [])]
     },
     { immediate: true },
 )
+
+watch(editing, (open) => {
+    if (open) {
+        nextTick(() => resetExistingTagSelect())
+    }
+})
+
+const availableTags = computed(() => {
+    const cur = selectedTags.value.map((t) => String(t).toLowerCase())
+    return app.allTags.filter((tag) => !cur.includes(String(tag).toLowerCase()))
+})
+
+function resetExistingTagSelect() {
+    const el = existingTagSelect.value
+    if (el) {
+        el.selectedIndex = 0
+    }
+}
+
+function onExistingTagSelect(e) {
+    const el = e.target
+    const raw = el.value
+    if (!raw) return
+    const tag = String(raw).trim().toLowerCase()
+    if (tag && !selectedTags.value.map((t) => String(t).toLowerCase()).includes(tag)) {
+        selectedTags.value = [...selectedTags.value, tag]
+    }
+    nextTick(() => {
+        resetExistingTagSelect()
+    })
+}
+
+function addNewTag() {
+    const tag = newTagInput.value.trim().toLowerCase()
+    const cur = selectedTags.value.map((t) => String(t).toLowerCase())
+    if (tag && !cur.includes(tag)) {
+        selectedTags.value = [...selectedTags.value, tag]
+        newTagInput.value = ""
+    }
+}
+
+function removeTag(tag) {
+    selectedTags.value = selectedTags.value.filter(t => t !== tag)
+}
 
 function formatDue(iso) {
     return dayjs(iso).format("MMM D, YYYY h:mm A")
@@ -219,10 +306,6 @@ function toggleSubtask(sid) {
 }
 
 function saveEdit() {
-    const tags = draft.value.tags
-        .split(",")
-        .map((s) => s.trim().toLowerCase())
-        .filter(Boolean)
     let recurrence = { rule: "none" }
     if (draft.value.recurrenceRule === "daily") recurrence = { rule: "daily" }
     else if (draft.value.recurrenceRule === "weekly") recurrence = { rule: "weekly", weekday: 1 }
@@ -231,7 +314,7 @@ function saveEdit() {
     app.updateTaskById(props.task.id, {
         title: draft.value.title.trim() || "Untitled",
         description: draft.value.description,
-        tags,
+        tags: selectedTags.value,
         priority: draft.value.priority,
         dueAt: draft.value.dueAt ? new Date(draft.value.dueAt).toISOString() : null,
         recurrence,
