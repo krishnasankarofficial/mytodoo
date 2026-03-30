@@ -18,7 +18,12 @@ export function parseQuickAdd(text) {
         if (!first || typeof first.index !== "number" || typeof first.text !== "string") {
             return { title: raw, dueAt: null }
         }
-        const dueAt = first.date().toISOString()
+        const parsedDate = first.date()
+        // If no specific time was mentioned, set to midnight (12:00 AM)
+        if (!first.start.isCertain('hour')) {
+            parsedDate.setHours(0, 0, 0, 0)
+        }
+        const dueAt = parsedDate.toISOString()
         const before = raw.slice(0, first.index).trim()
         const after = raw.slice(first.index + first.text.length).trim()
         let title = [before, after].filter(Boolean).join(" ").replace(/\s+/g, " ").trim()

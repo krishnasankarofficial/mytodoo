@@ -109,6 +109,14 @@ html.light .bg-light\/10 {
     background-color: rgba(245, 245, 244, 0.1) !important;
 }
 
+/* Orange color overrides for light mode */
+html.light .border-orange-500\/30 {
+    border-color: rgba(249, 115, 22, 0.3) !important;
+}
+html.light .bg-orange-500\/5 {
+    background-color: rgba(249, 115, 22, 0.05) !important;
+}
+
 /* Custom select dropdown styles */
 select {
     appearance: none;

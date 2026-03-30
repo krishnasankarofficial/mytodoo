@@ -1,7 +1,10 @@
 <template>
     <div
         class="group rounded-xl border border-light/10 bg-gray/40 p-3 md:p-4 text-left transition hover:border-light/25"
-        :class="{ 'opacity-70': task.status === 'completed' }"
+        :class="[
+            { 'opacity-70': task.status === 'completed' },
+            dueDateClass
+        ]"
     >
         <div class="flex flex-wrap gap-2 items-start justify-between">
             <div class="flex gap-2 min-w-0 flex-1">
@@ -171,7 +174,10 @@
                     </button>
                 </div>
             </div>
-            <input v-model="draft.dueAt" type="datetime-local" class="w-full bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm" />
+            <div>
+                <label class="block text-xs text-light/50 mb-1">Due date & time</label>
+                <input v-model="draft.dueAt" type="datetime-local" class="w-full bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm" />
+            </div>
             <label class="block text-xs text-light/50">Priority</label>
             <select v-model="draft.priority" class="w-full bg-dark border border-light/20 rounded-lg px-3 py-2 text-sm">
                 <option value="high">High</option>
@@ -243,6 +249,28 @@ const priorityColors = {
 function getPriorityClass(priority) {
     return priorityColors[priority] || priorityColors.none
 }
+
+const dueDateClass = computed(() => {
+    if (!props.task.dueAt || props.task.status !== 'active') return ''
+    
+    const now = dayjs()
+    const due = dayjs(props.task.dueAt)
+    const today = now.startOf('day')
+    const tomorrow = today.add(1, 'day')
+    
+    if (due.isBefore(today)) {
+        // Overdue - stronger red
+        return 'border-red/40 bg-red/10'
+    } else if (due.isSame(today, 'day')) {
+        // Due today - minimal red
+        return 'border-red/30 bg-red/5'
+    } else if (due.isSame(tomorrow, 'day')) {
+        // Due tomorrow - light orange/yellow
+        return 'border-orange-500/30 bg-orange-500/5'
+    }
+    
+    return ''
+})
 
 watch(
     () => props.task,
@@ -325,12 +353,27 @@ function saveEdit() {
     else if (draft.value.recurrenceRule === "weekly") recurrence = { rule: "weekly", weekday: 1 }
     else if (draft.value.recurrenceRule === "custom")
         recurrence = { rule: "custom", intervalDays: Math.max(1, draft.value.intervalDays || 0) }
+    
+    let dueAt = null
+    if (draft.value.dueAt) {
+        try {
+            let dateStr = draft.value.dueAt
+            // If only date is provided (YYYY-MM-DD), append 00:00 time
+            if (dateStr.length === 10 && !dateStr.includes('T')) {
+                dateStr += 'T00:00'
+            }
+            dueAt = new Date(dateStr).toISOString()
+        } catch (e) {
+            console.error("Invalid date:", draft.value.dueAt, e)
+        }
+    }
+    
     app.updateTaskById(props.task.id, {
         title: draft.value.title.trim() || "Untitled",
         description: draft.value.description,
         tags: selectedTags.value,
         priority: draft.value.priority,
-        dueAt: draft.value.dueAt ? new Date(draft.value.dueAt).toISOString() : null,
+        dueAt,
         recurrence,
     })
     editing.value = false
