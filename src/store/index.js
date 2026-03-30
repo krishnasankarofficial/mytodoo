@@ -2,6 +2,13 @@ import { createStore } from "vuex"
 
 export const STORAGE_KEY = "tasks"
 
+const PRIORITY_LEVELS = new Set(["none", "low", "medium", "high"])
+
+function normalizePriority(raw) {
+    if (typeof raw === "string" && PRIORITY_LEVELS.has(raw)) return raw
+    return "none"
+}
+
 function normalizeTask(raw, fallbackIndex) {
     const now = new Date()
     const created = raw.created_at ? new Date(raw.created_at) : now
@@ -12,6 +19,7 @@ function normalizeTask(raw, fallbackIndex) {
         task: typeof raw.task === "string" ? raw.task : String(raw.task ?? ""),
         status: Boolean(raw.status),
         edit: Boolean(raw.edit),
+        priority: normalizePriority(raw.priority),
         created_at: Number.isNaN(created.getTime()) ? now : created,
         updated_at: Number.isNaN(updated.getTime()) ? now : updated,
         ...(raw.id ? { id: raw.id } : {}),
@@ -69,6 +77,9 @@ const store = createStore({
         DELETE_TASK(state, index) {
             state.tasks.splice(index, 1)
         },
+        CLEAR_COMPLETED(state) {
+            state.tasks = state.tasks.filter((t) => !t.status)
+        },
         SET_LOADING(state, status) {
             state.loading = status
         },
@@ -107,6 +118,19 @@ const store = createStore({
         },
         deleteTask({ commit }, { index }) {
             commit("DELETE_TASK", index)
+        },
+        clearCompleted({ commit, dispatch }) {
+            commit("CLEAR_COMPLETED")
+            dispatch("saveTasksLocal")
+        },
+        importTasksFromJson({ commit, dispatch }, jsonString) {
+            const data = JSON.parse(jsonString)
+            if (!Array.isArray(data)) {
+                throw new Error("File must contain a JSON array of tasks.")
+            }
+            const tasks = normalizeTasks(data)
+            commit("SET_TASKS", tasks)
+            dispatch("saveTasksLocal")
         },
         saveTasksLocal({ state, dispatch }) {
             try {

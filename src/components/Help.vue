@@ -29,8 +29,24 @@
                 </ul>
             </section>
             <section class="p-3 bg-gray rounded-xl">
+                <h3 class="font-PoppinsBold text-green mb-1">Priority</h3>
+                <p class="text-light/90">Choose a priority when adding a task. Open tasks are listed with highest priority first. You can change priority from the menu on each open task.</p>
+            </section>
+            <section class="p-3 bg-gray rounded-xl">
+                <h3 class="font-PoppinsBold text-green mb-1">Search</h3>
+                <p class="text-light/90">Filter open and completed tasks by text. Clear the field to show everything again.</p>
+            </section>
+            <section class="p-3 bg-gray rounded-xl">
+                <h3 class="font-PoppinsBold text-green mb-1">Backup (JSON)</h3>
+                <p class="text-light/90"><strong class="text-light">Export</strong> downloads your tasks as a JSON file. <strong class="text-light">Import</strong> replaces all current tasks with the file—confirm before proceeding.</p>
+            </section>
+            <section class="p-3 bg-gray rounded-xl">
+                <h3 class="font-PoppinsBold text-green mb-1">Clear done</h3>
+                <p class="text-light/90">Removes every completed task in one step. Open tasks are not affected.</p>
+            </section>
+            <section class="p-3 bg-gray rounded-xl">
                 <h3 class="font-PoppinsBold text-green mb-1">Add a task</h3>
-                <p class="text-light/90">Type in the field, then press Enter or tap Add. New tasks appear under Open.</p>
+                <p class="text-light/90">Type in the field, set priority if needed, then press Enter or tap Add. New tasks appear under Open.</p>
             </section>
             <section class="p-3 bg-gray rounded-xl">
                 <h3 class="font-PoppinsBold text-green mb-1">Complete</h3>
