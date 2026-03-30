@@ -12,15 +12,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "moment": "^2.30.1",
+    "@vueuse/core": "^14.2.1",
+    "chrono-node": "^2.9.0",
+    "dayjs": "^1.11.20",
+    "pinia": "^3.0.4",
+    "sortablejs": "^1.15.7",
     "vue": "^3.4.21",
-    "vuex": "^4.1.0"
+    "vue-router": "^4.6.4",
+    "vuedraggable": "^4.1.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3",
-    "vite": "^5.2.8"
+    "vite": "^5.2.8",
+    "vite-plugin-pwa": "^1.2.0"
   }
 }
