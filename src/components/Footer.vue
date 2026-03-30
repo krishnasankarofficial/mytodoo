@@ -1,17 +1,22 @@
 <template>
-    <div class="text-center fixed text-xs lg:text-sm bottom-0 w-full min-h-10 bg-dark flex flex-row items-center justify-center gap-4 p-6 z-50 border-t border-light/10">
-        <span class="font-PoppinsBold flex-1 text-start">&copy; {{ year }} Stride</span>
-        <span class="text-light/80 hidden sm:inline"
-            >Private & offline · Built by
-            <a
-                href="https://www.krishnasankar.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="font-PoppinsBold text-light hover:text-red transition-colors duration-200"
-                >Krishnasankar</a
-            ></span
-        >
-        <div class="flex items-center justify-end flex-1 gap-2">
+    <div
+        class="fixed text-xs lg:text-sm bottom-0 w-full min-h-10 bg-dark grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4 px-4 sm:px-6 py-6 z-50 border-t border-light/10"
+    >
+        <div class="min-w-0" />
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-1 sm:gap-2 text-center justify-self-center max-w-[min(100%,36rem)]">
+            <span class="font-PoppinsBold">&copy; {{ year }} Stride</span>
+            <span class="text-light/80 hidden sm:inline"
+                ><span class="text-light/40 sm:mx-1" aria-hidden="true">·</span>Private & offline · Built by
+                <a
+                    href="https://www.krishnasankar.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-PoppinsBold text-light hover:text-red transition-colors duration-200"
+                    >Krishnasankar</a
+                ></span
+            >
+        </div>
+        <div class="flex justify-end min-w-0 gap-2">
             <Tooltip
                 v-if="typeof Notification !== 'undefined'"
                 text="Enable browser notifications when the Focus Pomodoro timer finishes"
