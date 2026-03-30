@@ -1,10 +1,16 @@
 import { onMounted, onUnmounted } from "vue"
 import { useRouter } from "vue-router"
 
-export function useKeyboardShortcuts({ onQuickAdd } = {}) {
+export function useKeyboardShortcuts({ onQuickAdd, onFocusSearch } = {}) {
     const router = useRouter()
 
     function handler(e) {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k" && onFocusSearch) {
+            e.preventDefault()
+            onFocusSearch()
+            return
+        }
+
         const inTextField =
             e.target &&
             (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || e.target.isContentEditable)
@@ -12,7 +18,7 @@ export function useKeyboardShortcuts({ onQuickAdd } = {}) {
         if (inTextField && !e.altKey) {
             return
         }
-        if (e.altKey && e.key === "7") {
+        if (e.altKey && e.key === "8") {
             e.preventDefault()
             router.push("/docs")
         }
@@ -26,17 +32,21 @@ export function useKeyboardShortcuts({ onQuickAdd } = {}) {
         }
         if (e.altKey && e.key === "3") {
             e.preventDefault()
-            router.push("/completed")
+            router.push("/all")
         }
         if (e.altKey && e.key === "4") {
             e.preventDefault()
-            router.push("/trash")
+            router.push("/completed")
         }
         if (e.altKey && e.key === "5") {
             e.preventDefault()
-            router.push("/all")
+            router.push("/trash")
         }
         if (e.altKey && e.key === "6") {
+            e.preventDefault()
+            router.push("/focus")
+        }
+        if (e.altKey && e.key === "7") {
             e.preventDefault()
             router.push("/streak")
         }

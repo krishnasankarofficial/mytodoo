@@ -35,7 +35,7 @@
             <p class="text-sm text-light/80 leading-relaxed">
                 For keyboard shortcuts, Quick Add examples, storage details, and every feature in one place, open
                 <RouterLink to="/docs" class="text-red font-PoppinsBold hover:underline">Documentation</RouterLink>
-                or press <kbd class="px-1.5 py-0.5 rounded bg-dark border border-light/25 font-mono text-[11px]">Alt+7</kbd>.
+                or press <kbd class="px-1.5 py-0.5 rounded bg-dark border border-light/25 font-mono text-[11px]">Alt+8</kbd>.
             </p>
         </div>
     </section>

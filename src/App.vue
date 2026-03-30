@@ -124,6 +124,7 @@ const toastIsError = computed(() => notification.value.type === "error")
 
 useKeyboardShortcuts({
     onQuickAdd: () => document.getElementById("quick-add")?.focus(),
+    onFocusSearch: () => document.getElementById("task-search")?.focus(),
 })
 
 function showConfirm(options) {
@@ -191,7 +192,7 @@ defineExpose({ showConfirm })
                             About
                         </RouterLink>
                     </Tooltip>
-                    <Tooltip text="Shortcuts, features, storage — full reference (Alt+7)" position="bottom" inline wrap>
+                    <Tooltip text="Shortcuts, features, storage — full reference (Alt+8)" position="bottom" inline wrap>
                         <RouterLink
                             to="/docs"
                             class="text-light/60 flex items-center gap-1.5 border-b border-dotted border-light/25 hover:text-light/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green/60 rounded-sm"
@@ -226,13 +227,31 @@ defineExpose({ showConfirm })
                         wrap
                     >
                         <div class="relative w-full">
-                            <Search :size="16" class="absolute left-3 top-1/2 -translate-y-1/2 text-light/40" />
+                            <Search :size="16" class="absolute left-3 top-1/2 -translate-y-1/2 text-light/40 pointer-events-none" />
                             <input
+                                id="task-search"
                                 v-model="searchInput"
                                 type="search"
                                 placeholder="Search…"
-                                class="w-full bg-gray/80 text-light text-sm pl-10 pr-4 py-2.5 rounded-xl border border-light/15 outline-none"
+                                class="w-full bg-gray/80 text-light text-sm pl-10 pr-[5.25rem] sm:pr-28 py-2.5 rounded-xl border border-light/15 outline-none"
+                                aria-keyshortcuts="Control+K Meta+K"
                             />
+                            <span
+                                class="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1 select-none"
+                                aria-hidden="true"
+                            >
+                                <kbd
+                                    class="rounded border border-light/20 bg-dark/50 px-1 py-0.5 text-[9px] sm:text-[10px] font-mono text-light/45 leading-none"
+                                >
+                                    Ctrl+K
+                                </kbd>
+                                <span class="text-light/25 text-[10px]">·</span>
+                                <kbd
+                                    class="rounded border border-light/20 bg-dark/50 px-1 py-0.5 text-[9px] sm:text-[10px] font-mono text-light/45 leading-none"
+                                >
+                                    ⌘K
+                                </kbd>
+                            </span>
                         </div>
                     </Tooltip>
                 </div>
