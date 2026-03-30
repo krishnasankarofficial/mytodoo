@@ -1,20 +1,25 @@
 <template>
-    <Tooltip :text="dueDateTooltip" position="top">
-        <div
-            class="group rounded-xl border border-light/10 bg-gray/40 p-3 md:p-4 text-left transition hover:border-light/25"
-            :class="[
-                { 'opacity-70': task.status === 'completed' },
-                dueDateClass
-            ]"
-        >
+    <div
+        class="group rounded-xl border border-light/10 bg-gray/40 p-3 md:p-4 text-left transition hover:border-light/25"
+        :class="[
+            { 'opacity-70': task.status === 'completed' },
+            dueDateClass
+        ]"
+    >
         <div class="flex flex-wrap gap-2 items-start justify-between">
             <div class="flex gap-2 min-w-0 flex-1">
-                <span
+                <Tooltip
                     v-if="variant === 'active'"
-                    class="drag-handle cursor-grab text-light/30 select-none pt-1"
-                    aria-hidden="true"
-                    >⋮⋮</span
+                    text="Drag ⋮⋮ to reorder tasks"
+                    position="top"
+                    inline
                 >
+                    <span
+                        class="drag-handle cursor-grab text-light/30 select-none pt-1"
+                        aria-hidden="true"
+                        >⋮⋮</span
+                    >
+                </Tooltip>
                 <div class="min-w-0 flex-1">
                     <div class="flex flex-wrap items-center gap-2">
                         <input
@@ -30,25 +35,46 @@
                         >
                             {{ task.title }}
                         </h3>
-                        <span
+                        <Tooltip
                             v-if="task.priority !== 'none'"
-                            class="text-[10px] uppercase px-2 py-0.5 rounded border font-PoppinsBold"
-                            :class="getPriorityClass(task.priority)"
-                            >{{ task.priority }}</span
+                            :text="priorityTooltip"
+                            position="top"
+                            inline
                         >
+                            <span
+                                class="text-[10px] uppercase px-2 py-0.5 rounded border font-PoppinsBold"
+                                :class="getPriorityClass(task.priority)"
+                                >{{ task.priority }}</span
+                            >
+                        </Tooltip>
                     </div>
                     <p v-if="task.description" class="text-sm text-light/60 mt-1 whitespace-pre-wrap">
                         {{ task.description }}
                     </p>
                     <div class="flex flex-wrap gap-2 mt-2 text-xs text-light/50">
-                        <span v-if="task.dueAt" class="flex items-center gap-1">
-                            <Clock :size="12" />
-                            Due {{ formatDue(task.dueAt) }}
-                        </span>
-                        <span v-if="task.recurrence?.rule !== 'none'" class="flex items-center gap-1">
-                            <Repeat :size="12" />
-                            Repeats {{ task.recurrence.rule }}
-                        </span>
+                        <Tooltip
+                            v-if="task.dueAt"
+                            :text="dueDateTooltip || 'Due date'"
+                            position="top"
+                            inline
+                        >
+                            <span class="flex items-center gap-1 cursor-default">
+                                <Clock :size="12" />
+                                Due {{ formatDue(task.dueAt) }}
+                            </span>
+                        </Tooltip>
+                        <Tooltip
+                            v-if="task.recurrence?.rule !== 'none'"
+                            text="Repeats — next instance created when you complete"
+                            position="top"
+                            inline
+                            wrap
+                        >
+                            <span class="flex items-center gap-1 cursor-default">
+                                <Repeat :size="12" />
+                                Repeats {{ task.recurrence.rule }}
+                            </span>
+                        </Tooltip>
                     </div>
                     <div v-if="(task.tags || []).length" class="flex flex-wrap gap-1 mt-2">
                         <span
@@ -76,52 +102,63 @@
                 </div>
             </div>
             <div class="flex flex-wrap gap-2 shrink-0">
-                <button
+                <Tooltip
                     v-if="variant === 'active'"
-                    type="button"
-                    class="text-xs px-2 py-1 rounded border border-light/20 hover:bg-gray flex items-center gap-1"
-                    @click="editing = !editing"
+                    :text="editing ? 'Close editor' : 'Edit title, tags, due date, priority, recurrence'"
+                    position="top"
+                    wrap
+                    inline
                 >
-                    <Edit3 v-if="!editing" :size="12" />
-                    <XCircle v-else :size="12" />
-                    {{ editing ? "Close" : "Edit" }}
-                </button>
-                <button
-                    v-if="variant === 'active'"
-                    type="button"
-                    class="text-xs px-2 py-1 rounded border border-light/20 hover:bg-gray flex items-center gap-1"
-                    @click="app.softDelete(task.id)"
-                >
-                    <Trash2 :size="12" />
-                    Trash
-                </button>
-                <button
-                    v-if="variant === 'completed'"
-                    type="button"
-                    class="text-xs px-2 py-1 rounded border border-light/20 hover:bg-gray flex items-center gap-1"
-                    @click="app.uncompleteTask(task.id)"
-                >
-                    <RotateCcw :size="12" />
-                    Reopen
-                </button>
-                <button
-                    v-if="variant === 'trash'"
-                    type="button"
-                    class="text-xs px-2 py-1 rounded border border-green/40 text-green hover:bg-gray flex items-center gap-1"
-                    @click="app.restoreTask(task.id)"
-                >
-                    <RotateCcw :size="12" />
-                    Restore
-                </button>
-                <button
-                    v-if="variant === 'trash'"
-                    type="button"
-                    class="text-xs px-2 py-1 rounded border border-red/40 text-red hover:bg-gray flex items-center gap-1"
-                    @click="confirmDelete"
-                >
-                    <XCircle :size="12" />
-                    Delete forever
-                </button>
+                    <button
+                        type="button"
+                        class="text-xs px-2 py-1 rounded border border-light/20 hover:bg-gray flex items-center gap-1"
+                        @click="editing = !editing"
+                    >
+                        <Edit3 v-if="!editing" :size="12" />
+                        <XCircle v-else :size="12" />
+                        {{ editing ? "Close" : "Edit" }}
+                    </button>
+                </Tooltip>
+                <Tooltip v-if="variant === 'active'" text="Move to trash (restore later)" position="top" inline>
+                    <button
+                        type="button"
+                        class="text-xs px-2 py-1 rounded border border-light/20 hover:bg-gray flex items-center gap-1"
+                        @click="app.softDelete(task.id)"
+                    >
+                        <Trash2 :size="12" />
+                        Trash
+                    </button>
+                </Tooltip>
+                <Tooltip v-if="variant === 'completed'" text="Mark task not done" position="top" inline>
+                    <button
+                        type="button"
+                        class="text-xs px-2 py-1 rounded border border-light/20 hover:bg-gray flex items-center gap-1"
+                        @click="app.uncompleteTask(task.id)"
+                    >
+                        <RotateCcw :size="12" />
+                        Reopen
+                    </button>
+                </Tooltip>
+                <Tooltip v-if="variant === 'trash'" text="Restore to active tasks" position="top" inline>
+                    <button
+                        type="button"
+                        class="text-xs px-2 py-1 rounded border border-green/40 text-green hover:bg-gray flex items-center gap-1"
+                        @click="app.restoreTask(task.id)"
+                    >
+                        <RotateCcw :size="12" />
+                        Restore
+                    </button>
+                </Tooltip>
+                <Tooltip v-if="variant === 'trash'" text="Permanently delete — cannot be undone" position="top" inline>
+                    <button
+                        type="button"
+                        class="text-xs px-2 py-1 rounded border border-red/40 text-red hover:bg-gray flex items-center gap-1"
+                        @click="confirmDelete"
+                    >
+                        <XCircle :size="12" />
+                        Delete forever
+                    </button>
+                </Tooltip>
             </div>
         </div>
         <div v-if="editing && variant === 'active'" class="mt-4 space-y-2 border-t border-light/10 pt-3">
@@ -224,8 +261,7 @@
                 Save
             </button>
         </div>
-        </div>
-    </Tooltip>
+    </div>
 </template>
 
 <script setup>
@@ -293,12 +329,12 @@ const dueDateClass = computed(() => {
 
 const dueDateTooltip = computed(() => {
     if (!props.task.dueAt || props.task.status !== 'active') return ''
-    
+
     const now = dayjs()
     const due = dayjs(props.task.dueAt)
     const today = now.startOf('day')
     const tomorrow = today.add(1, 'day')
-    
+
     if (due.isBefore(today)) {
         return 'Overdue'
     } else if (due.isSame(today, 'day')) {
@@ -306,8 +342,15 @@ const dueDateTooltip = computed(() => {
     } else if (due.isSame(tomorrow, 'day')) {
         return 'Due tomorrow'
     }
-    
+
     return ''
+})
+
+const priorityTooltip = computed(() => {
+    const p = props.task.priority
+    if (!p || p === 'none') return ''
+    const label = p.charAt(0).toUpperCase() + p.slice(1)
+    return `${label} priority — color-coded in the list`
 })
 
 watch(

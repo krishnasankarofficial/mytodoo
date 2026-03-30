@@ -16,8 +16,8 @@
         >
             <div
                 v-if="show && text"
-                class="absolute z-50 px-2 py-1 text-xs text-light bg-gray border border-light/20 rounded-lg whitespace-nowrap pointer-events-none"
-                :class="positionClass"
+                class="absolute z-50 px-2 py-1 text-xs text-light bg-gray border border-light/20 rounded-lg pointer-events-none"
+                :class="[positionClass, wrap ? 'max-w-[min(18rem,calc(100vw-2rem))] whitespace-normal text-left leading-snug' : 'whitespace-nowrap']"
             >
                 {{ text }}
                 <div class="absolute w-2 h-2 bg-gray border-light/20 transform rotate-45" :class="arrowClass"></div>
@@ -34,6 +34,8 @@ const props = defineProps({
     position: { type: String, default: "top" }, // top, bottom, left, right
     /** Shrink-wrap trigger (e.g. heatmap cells) instead of full width */
     inline: { type: Boolean, default: false },
+    /** Allow line breaks for longer help text */
+    wrap: { type: Boolean, default: false },
 })
 
 const show = ref(false)

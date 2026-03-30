@@ -4,6 +4,7 @@ import { storeToRefs } from "pinia"
 import { RouterView, RouterLink } from "vue-router"
 import { Search, Tag, Download, Upload, Sun, Moon, Flame, CalendarCheck } from "lucide-vue-next"
 import NavBar from "./components/NavBar.vue"
+import Tooltip from "./components/Tooltip.vue"
 import QuickAddBar from "./components/QuickAddBar.vue"
 import StreakHeatmapPopover from "./components/StreakHeatmapPopover.vue"
 import Footer from "./components/Footer.vue"
@@ -157,25 +158,41 @@ defineExpose({ showConfirm })
                     </RouterLink>
                 </h1>
                 <div class="flex flex-wrap items-center gap-3 text-xs">
-                    <StreakHeatmapPopover>
-                        <span class="text-light/60 flex items-center gap-1.5 cursor-default border-b border-dotted border-light/25 hover:text-light/80">
-                            <Flame :size="14" :stroke-width="2.25" class="shrink-0 text-green/90" aria-hidden="true" />
-                            Streak {{ app.preferences.streakDays }}d
-                        </span>
-                    </StreakHeatmapPopover>
-                    <span class="text-light/60 flex items-center gap-1.5">
-                        <CalendarCheck :size="14" :stroke-width="2.25" class="shrink-0 text-green/90" aria-hidden="true" />
-                        Today {{ app.dailyProgressPercent }}%
-                    </span>
-                    <button
-                        type="button"
-                        class="px-2 py-1 rounded border border-light/20 hover:bg-gray flex items-center gap-1.5"
-                        @click="toggleTheme"
+                    <Tooltip
+                        text="Consecutive days with at least one completed task — hover for activity map"
+                        position="bottom"
+                        inline
+                        wrap
                     >
-                        <Sun v-if="app.preferences.theme === 'dark'" :size="14" />
-                        <Moon v-else :size="14" />
-                        {{ app.preferences.theme === "dark" ? "Light" : "Dark" }}
-                    </button>
+                        <StreakHeatmapPopover>
+                            <span class="text-light/60 flex items-center gap-1.5 cursor-default border-b border-dotted border-light/25 hover:text-light/80">
+                                <Flame :size="14" :stroke-width="2.25" class="shrink-0 text-green/90" aria-hidden="true" />
+                                Streak {{ app.preferences.streakDays }}d
+                            </span>
+                        </StreakHeatmapPopover>
+                    </Tooltip>
+                    <Tooltip
+                        text="Daily progress — share of today’s due tasks completed"
+                        position="bottom"
+                        inline
+                        wrap
+                    >
+                        <span class="text-light/60 flex items-center gap-1.5 cursor-default">
+                            <CalendarCheck :size="14" :stroke-width="2.25" class="shrink-0 text-green/90" aria-hidden="true" />
+                            Today {{ app.dailyProgressPercent }}%
+                        </span>
+                    </Tooltip>
+                    <Tooltip text="Toggle light / dark theme" position="bottom" inline>
+                        <button
+                            type="button"
+                            class="px-2 py-1 rounded border border-light/20 hover:bg-gray flex items-center gap-1.5"
+                            @click="toggleTheme"
+                        >
+                            <Sun v-if="app.preferences.theme === 'dark'" :size="14" />
+                            <Moon v-else :size="14" />
+                            {{ app.preferences.theme === "dark" ? "Light" : "Dark" }}
+                        </button>
+                    </Tooltip>
                 </div>
             </div>
         </header>
@@ -185,56 +202,88 @@ defineExpose({ showConfirm })
             <QuickAddBar />
             <div class="flex flex-col sm:flex-row gap-2 w-full">
                 <div class="relative flex-1">
-                    <Search :size="16" class="absolute left-3 top-1/2 -translate-y-1/2 text-light/40" />
-                    <input
-                        v-model="searchInput"
-                        type="search"
-                        placeholder="Search…"
-                        class="w-full bg-gray/80 text-light text-sm pl-10 pr-4 py-2.5 rounded-xl border border-light/15 outline-none"
-                    />
+                    <Tooltip
+                        text="Search task titles, descriptions, and tags — works in every view"
+                        position="top"
+                        wrap
+                    >
+                        <div class="relative w-full">
+                            <Search :size="16" class="absolute left-3 top-1/2 -translate-y-1/2 text-light/40" />
+                            <input
+                                v-model="searchInput"
+                                type="search"
+                                placeholder="Search…"
+                                class="w-full bg-gray/80 text-light text-sm pl-10 pr-4 py-2.5 rounded-xl border border-light/15 outline-none"
+                            />
+                        </div>
+                    </Tooltip>
                 </div>
                 <div class="relative flex-1">
-                    <Tag :size="16" class="absolute left-3 top-1/2 -translate-y-1/2 text-light/40 pointer-events-none z-10" />
-                    <select
-                        v-model="tagInput"
-                        class="w-full bg-gray/80 text-light text-sm pl-10 pr-4 py-2.5 rounded-xl border border-light/15 outline-none appearance-none cursor-pointer"
+                    <Tooltip
+                        text="Show only tasks with this tag (works with search)"
+                        position="top"
+                        wrap
                     >
-                        <option value="">All tags</option>
-                        <option v-for="tag in app.allTags" :key="tag" :value="tag">
-                            {{ tag }}
-                        </option>
-                    </select>
+                        <div class="relative w-full">
+                            <Tag :size="16" class="absolute left-3 top-1/2 -translate-y-1/2 text-light/40 pointer-events-none z-10" />
+                            <select
+                                v-model="tagInput"
+                                class="w-full bg-gray/80 text-light text-sm pl-10 pr-4 py-2.5 rounded-xl border border-light/15 outline-none appearance-none cursor-pointer"
+                            >
+                                <option value="">All tags</option>
+                                <option v-for="tag in app.allTags" :key="tag" :value="tag">
+                                    {{ tag }}
+                                </option>
+                            </select>
+                        </div>
+                    </Tooltip>
                 </div>
             </div>
-            <div class="flex flex-wrap gap-2">
-                <button
-                    type="button"
-                    class="text-xs font-PoppinsBold px-3 py-1.5 rounded-lg border border-light/25 hover:bg-gray flex items-center gap-1.5"
-                    @click="exportJson"
+            <div class="flex flex-wrap gap-2 items-center">
+                <Tooltip text="Download a JSON backup (timestamp in filename)" position="top" inline>
+                    <button
+                        type="button"
+                        class="text-xs font-PoppinsBold px-3 py-1.5 rounded-lg border border-light/25 hover:bg-gray flex items-center gap-1.5"
+                        @click="exportJson"
+                    >
+                        <Download :size="14" />
+                        Export JSON
+                    </button>
+                </Tooltip>
+                <Tooltip
+                    text="Restore from a backup file — preview before replacing data"
+                    position="top"
+                    wrap
+                    inline
                 >
-                    <Download :size="14" />
-                    Export JSON
-                </button>
-                <button
-                    type="button"
-                    class="text-xs font-PoppinsBold px-3 py-1.5 rounded-lg border border-light/25 hover:bg-gray flex items-center gap-1.5"
-                    @click="triggerImport"
+                    <button
+                        type="button"
+                        class="text-xs font-PoppinsBold px-3 py-1.5 rounded-lg border border-light/25 hover:bg-gray flex items-center gap-1.5"
+                        @click="triggerImport"
+                    >
+                        <Upload :size="14" />
+                        Import JSON
+                    </button>
+                </Tooltip>
+                <Tooltip
+                    text="Auto-download JSON to your Downloads folder every 60 minutes"
+                    position="top"
+                    wrap
+                    inline
                 >
-                    <Upload :size="14" />
-                    Import JSON
-                </button>
-                <label class="flex items-center gap-2 text-xs text-light/70 cursor-pointer">
-                    <input
-                        type="checkbox"
-                        :checked="app.preferences.autoBackupEnabled"
-                        @change="
-                            app.updatePreferences({
-                                autoBackupEnabled: $event.target.checked,
-                            })
-                        "
-                    />
-                    Auto backup interval
-                </label>
+                    <label class="flex items-center gap-2 text-xs text-light/70 cursor-pointer">
+                        <input
+                            type="checkbox"
+                            :checked="app.preferences.autoBackupEnabled"
+                            @change="
+                                app.updatePreferences({
+                                    autoBackupEnabled: $event.target.checked,
+                                })
+                            "
+                        />
+                        Auto backup interval
+                    </label>
+                </Tooltip>
             </div>
             <input
                 ref="importFile"

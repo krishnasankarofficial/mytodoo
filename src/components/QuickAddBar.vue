@@ -1,17 +1,29 @@
 <template>
     <form class="flex flex-col sm:flex-row gap-2 w-full" @submit.prevent="submit">
-        <label class="sr-only" for="qa-priority">Priority</label>
-        <select
-            id="qa-priority"
-            v-model="priority"
-            class="shrink-0 bg-gray text-light font-Poppins text-sm border border-light/20 rounded-2xl px-4 py-4 outline-none min-w-[120px]"
+        <Tooltip
+            text="Default priority for new tasks (High · Medium · Low · None)"
+            position="top"
+            inline
         >
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
-            <option value="none">None</option>
-        </select>
+            <label class="sr-only" for="qa-priority">Priority</label>
+            <select
+                id="qa-priority"
+                v-model="priority"
+                class="shrink-0 bg-gray text-light font-Poppins text-sm border border-light/20 rounded-2xl px-4 py-4 outline-none min-w-[120px]"
+            >
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+                <option value="none">None</option>
+            </select>
+        </Tooltip>
         <div class="relative flex-1 min-w-0">
+            <Tooltip
+                text="Quick add (Alt+N). Type naturally — dates parse automatically. Enter or Add."
+                position="top"
+                wrap
+            >
+                <div class="relative w-full min-w-0">
             <input
                 id="quick-add"
                 ref="inputRef"
@@ -29,6 +41,8 @@
                 <Plus :size="16" :stroke-width="2.5" />
                 Add
             </button>
+                </div>
+            </Tooltip>
         </div>
     </form>
 </template>
@@ -37,6 +51,7 @@
 import { ref, onMounted } from "vue"
 import { useRouter } from "vue-router"
 import { Plus } from "lucide-vue-next"
+import Tooltip from "./Tooltip.vue"
 import { useAppStore } from "../stores/app.js"
 import { useUiStore } from "../stores/ui.js"
 import { parseQuickAdd } from "../composables/useQuickAdd.js"
