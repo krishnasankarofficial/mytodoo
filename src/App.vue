@@ -204,7 +204,7 @@ defineExpose({ showConfirm })
                     </Tooltip>
                     <Tooltip
                         v-if="activeUsersConfigured && activeUserCount !== null"
-                        text="Approximate visitors with Stride open in the last few minutes — requires Upstash Redis on the host (Vercel env vars)"
+                        text="Rough count of people using Stride right now (last few minutes)"
                         position="bottom"
                         inline
                         wrap
