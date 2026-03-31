@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router"
+import { trackGaPageView } from "../utils/analytics.js"
 import { applyRouteSeo } from "../utils/seo.js"
 
 const TodayView = () => import("../views/TodayView.vue")
@@ -113,4 +114,5 @@ export const router = createRouter({
 
 router.afterEach((to) => {
     applyRouteSeo(to)
+    trackGaPageView(to.fullPath)
 })
