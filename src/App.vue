@@ -2,7 +2,19 @@
 import { ref, computed, onMounted, watch } from "vue"
 import { storeToRefs } from "pinia"
 import { RouterView, RouterLink } from "vue-router"
-import { Search, Tag, Download, Upload, Sun, Moon, Flame, CalendarCheck, Info, BookOpen } from "lucide-vue-next"
+import {
+    Search,
+    Tag,
+    Download,
+    Upload,
+    Sun,
+    Moon,
+    Flame,
+    CalendarCheck,
+    Info,
+    BookOpen,
+    Users,
+} from "lucide-vue-next"
 import NavBar from "./components/NavBar.vue"
 import Tooltip from "./components/Tooltip.vue"
 import QuickAddBar from "./components/QuickAddBar.vue"
@@ -15,11 +27,13 @@ import { useAppStore } from "./stores/app.js"
 import { parseAppState } from "./storage/schema.js"
 import { migrateFromLegacyTasksKey } from "./storage/migrations.js"
 import { useKeyboardShortcuts } from "./composables/useKeyboardShortcuts.js"
+import { useActiveUserCount } from "./composables/useActiveUserCount.js"
 
 const logoSrc = `${import.meta.env.BASE_URL}favicon.svg`
 
 const ui = useUiStore()
 const app = useAppStore()
+const { active: activeUserCount, configured: activeUsersConfigured } = useActiveUserCount()
 const { toastOpen, notification } = storeToRefs(ui)
 
 const searchInput = ref("")
@@ -186,6 +200,18 @@ defineExpose({ showConfirm })
                         <span class="text-light/60 flex items-center gap-1.5 cursor-default">
                             <CalendarCheck :size="14" :stroke-width="2.25" class="shrink-0 text-green/90" aria-hidden="true" />
                             Today {{ app.dailyProgressPercent }}%
+                        </span>
+                    </Tooltip>
+                    <Tooltip
+                        v-if="activeUsersConfigured && activeUserCount !== null"
+                        text="Approximate visitors with Stride open in the last few minutes — requires Upstash Redis on the host (Vercel env vars)"
+                        position="bottom"
+                        inline
+                        wrap
+                    >
+                        <span class="text-light/60 flex items-center gap-1.5 cursor-default">
+                            <Users :size="14" :stroke-width="2.25" class="shrink-0 text-light/50" aria-hidden="true" />
+                            Active {{ activeUserCount }}
                         </span>
                     </Tooltip>
                     <span class="text-light/25 hidden sm:inline select-none" aria-hidden="true">|</span>

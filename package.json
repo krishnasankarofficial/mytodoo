@@ -12,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@upstash/redis": "^1.37.0",
     "@vueuse/core": "^14.2.1",
     "chrono-node": "^2.9.0",
     "dayjs": "^1.11.20",
