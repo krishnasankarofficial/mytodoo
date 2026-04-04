@@ -1,105 +1,105 @@
-# My ToDo App
+# Stride
 
-Welcome to My ToDo App, a simple and intuitive application built with Vue.js that helps you manage your daily tasks efficiently.
+**Stride** is a fast, private task list for the browser. Your tasks stay on your device—no account required, offline-capable, and installable as a PWA. Built by [Krishnasankar](https://www.krishnasankar.com).
 
-## Table of Contents
+![Stride — dark theme with Today / Upcoming / All views, quick add, search, tags, and task cards](docs/screenshot.png)
 
-- [Features](#features)
+## What you can do
+
+- **Natural-language quick add** — Try phrases like `Call Sam tomorrow 3pm`; due dates are parsed automatically (via [chrono-node](https://github.com/wanasit/chrono)).
+- **Priorities** — Set priority when creating tasks (for example Low / Medium / High).
+- **Views** — **Today**, **Upcoming**, **All**, **Done**, **Trash**, **Focus** (Pomodoro-style focus), and **Streak** to stay on track.
+- **Search** — Find tasks quickly (keyboard shortcut **Ctrl+K**).
+- **Tags** — Organize and filter with tags.
+- **Import / export** — Move your data with **Export JSON** and **Import JSON**; optional **auto backup** interval.
+- **Themes** — Light and dark modes.
+- **Progress cues** — Streak and “today” completion hints in the header.
+
+Live site: [stride.krishnasankar.com](https://stride.krishnasankar.com/) · Source: [github.com/krishnasankarofficial/stride](https://github.com/krishnasankarofficial/stride)
+
+## Tech stack
+
+- [Vue 3](https://vuejs.org/) · [Vite](https://vitejs.dev/) · [Pinia](https://pinia.vuejs.org/) · [Vue Router](https://router.vuejs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [vite-plugin-pwa](https://vite-pwa-org.netlify.app/) for offline / installable app support
+
+## Table of contents
+
 - [Installation](#installation)
 - [Usage](#usage)
+- [Building for production](#building-for-production)
 - [Contributing](#contributing)
 - [License](#license)
-
-## Features
-
-- **Add Tasks**: Quickly add new tasks to your to-do list.
-- **Edit Tasks**: Modify the details of existing tasks.
-- **Delete Tasks**: Remove tasks that are no longer needed.
-- **Mark as Completed**: Mark tasks as completed to keep track of your progress.
-- **Filter Tasks**: View all, active, or completed tasks.
-- **Offline Mode**: Manage tasks without internet connection.
-- **Online Mode**: Manage and sync tasks with internet connection.
+- [Acknowledgements](#acknowledgements)
+- [Contact](#contact)
 
 ## Installation
 
-To get a local copy up and running follow these simple steps:
+1. **Clone the repository**
 
-1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/krishnasankarofficial/stride.git
+   ```
 
-    ```bash
-    git clone https://github.com/krishnasankarkk/vue-todo-app.git
-    ```
+2. **Enter the project directory**
 
-2. **Navigate to the project directory:**
+   ```bash
+   cd stride
+   ```
 
-    ```bash
-    cd vue-todo-app
-    ```
+3. **Install dependencies**
 
-3. **Install dependencies:**
-
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
 ## Usage
 
-To start the development server, run:
+Start the dev server:
 
 ```bash
 npm run dev
 ```
-This will start the app on http://localhost:5173/ by default.
 
-## Building for Production
+The app is served at [http://localhost:5173/](http://localhost:5173/) by default.
 
-To create a production-ready build, run:
+## Building for production
 
 ```bash
 npm run build
 ```
-This will generate the necessary files in the dist directory, which can then be deployed to your web server.
+
+Output is written to the `dist` folder. Preview the production build locally with:
+
+```bash
+npm run preview
+```
 
 ## Contributing
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are welcome.
 
-1. Fork the Project
-2. Create your Feature Branch.
-   
-   ```
-   git checkout -b feature/AmazingFeature
-   ```
-3. Commit your Changes.
-   
-   ```
-   git commit -m 'Add some AmazingFeature'
-   ```
-4. Push to the Branch.
-   
-   ```
-   git push origin feature/AmazingFeature
-   ```
-5. Open a Pull Request.
+1. Fork the project  
+2. Create a feature branch (`git checkout -b feature/your-feature`)  
+3. Commit your changes  
+4. Push to the branch and open a pull request  
 
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License. See [`LICENSE`](LICENSE) for details.
 
 ## Acknowledgements
 
 - [Vue.js](https://vuejs.org/)
-- [Vue CLI](https://cli.vuejs.org/)
-- [npm](https://www.npmjs.com/)
-- [Vuex](https://vuex.vuejs.org/)
-- [Vuetify](https://vuetifyjs.com/en/)
-- [Firebase](https://firebase.google.com/)
+- [Vite](https://vitejs.dev/)
+- [Pinia](https://pinia.vuejs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [chrono-node](https://github.com/wanasit/chrono) — natural-language dates
+- [Lucide](https://lucide.dev/) — icons
 
 ## Contact
 
-If you have any questions, suggestions, or feedback, feel free to reach out:
-
-- **Name:** Krishnasankar K K
-- **Email:** [krishnasankarofficial@gmail.com](mailto:krishnasankarofficial@gmail.com)
-- **Website:** [krishnasankar.vercel.app](https://krishnasankar.vercel.app)
+- **Name:** Krishnasankar K K  
+- **Email:** [hello@krishnasankar.com](mailto:hello@krishnasankar.com)  
+- **Website:** [www.krishnasankar.com](https://www.krishnasankar.com)  
+- **Stride (this app):** [stride.krishnasankar.com](https://stride.krishnasankar.com/)
